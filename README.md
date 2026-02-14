@@ -123,8 +123,8 @@ ag-kit init --dry-run      # Preview actions without executing
 
 ## Documentation
 
-- **[Web App Example](https://antigravity-kit.vercel.app//docs/guide/examples/brainstorm)** - Step-by-step guide to creating a web application
-- **[Online Docs](https://antigravity-kit.vercel.app//docs)** - Browse all documentation online
+- **[Web App Example](https://antigravity-kit-v2.vercel.app/docs/guide/examples/brainstorm)** - Step-by-step guide to creating a web application
+- **[Online Docs](https://antigravity-kit-v2.vercel.app/docs)** - Browse all documentation online
 
 ## Buy me coffee
 

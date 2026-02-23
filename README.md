@@ -1,14 +1,25 @@
-# Antigravity Kit
+# Antigravity Kit (Custom Fork by Fernando Tenguan)
 
 > AI Agent templates with Skills, Agents, and Workflows
+> **Custom Version:** Enhanced with Vercel, Claude, and React optimizations.
 
-<div  align="center">
-    <a href="https://unikorn.vn/p/antigravity-kit?ref=unikorn" target="_blank"><img src="https://unikorn.vn/api/widgets/badge/antigravity-kit?theme=dark" alt="Antigravity Kit - Nổi bật trên Unikorn.vn" style="width: 210px; height: 54px;" width="210" height="54" /></a>
-    <a href="https://unikorn.vn/p/antigravity-kit?ref=unikorn" target="_blank"><img src="https://unikorn.vn/api/widgets/badge/antigravity-kit/rank?theme=dark&type=daily" alt="Antigravity Kit - Hàng ngày" style="width: 250px; height: 64px;" width="250" height="64" /></a>
-    <a href="https://launch.j2team.dev/products/antigravity-kit" target="_blank"><img src="https://launch.j2team.dev/badge/antigravity-kit/dark" alt="Antigravity Kit on J2TEAM Launch" width="250" height="54" /></a>
-</div>
+## 🚀 What's New in this Fork?
+
+This version has been customized and loaded with powerful external skills to supercharge your development workflow:
+
+- **@rmyndharis/antigravity-skills**: Additional community-driven agent skills.
+- **vercel-labs/agent-skills**:
+  - `vercel-react-best-practices`: React and Next.js performance optimizations based on Vercel Engineering standards.
+  - `web-design-guidelines`: Web interface guidelines compliance, accessibility checks, and UX audits.
+- **anthropics/claude-code**:
+  - `frontend-design`: Advanced design thinking, UI/UX decision making, and aesthetic configurations.
+- **Included Files**: The `skills_guide.md` is now shipped by default when initiating this kit.
+
+---
 
 ## Quick Install
+
+To use this customized fork instead of the original, you need to point the CLI tool to this repository. *(See instructions below on how to do this or use this repository locally).*
 
 ```bash
 npx @vudovn/ag-kit init
@@ -36,9 +47,8 @@ To keep the `.agent/` folder local (not tracked by Git) while maintaining AI fun
 | Component     | Count | Description                                                        |
 | ------------- | ----- | ------------------------------------------------------------------ |
 | **Agents**    | 20    | Specialist AI personas (frontend, backend, security, PM, QA, etc.) |
-| **Skills**    | 37    | Domain-specific knowledge modules                                  |
+| **Skills**    | 40+   | Domain-specific knowledge modules (Including Vercel & Claude)      |
 | **Workflows** | 11    | Slash command procedures                                           |
-
 
 ## Usage
 
@@ -58,16 +68,13 @@ AI: 🤖 Using @debugger for systematic analysis...
 ```
 
 **How it works:**
-
 - Analyzes your request silently
-
 - Detects domain(s) automatically (frontend, backend, security, etc.)
 - Selects the best specialist(s)
 - Informs you which expertise is being applied
 - You get specialist-level responses without needing to know the system architecture
 
 **Benefits:**
-
 - ✅ Zero learning curve - just describe what you need
 - ✅ Always get expert responses
 - ✅ Transparent - shows which agent is being used
@@ -92,7 +99,6 @@ Invoke workflows with slash commands:
 | `/ui-ux-pro-max` | Design with 50 styles                 |
 
 Example:
-
 ```
 /brainstorm authentication system
 /create landing page with hero section
@@ -116,30 +122,23 @@ Skills are loaded automatically based on task context. The AI reads skill descri
 ```bash
 ag-kit init --force        # Overwrite existing .agent folder
 ag-kit init --path ./myapp # Install in specific directory
-ag-kit init --branch dev   # Use specific branch
 ag-kit init --quiet        # Suppress output (for CI/CD)
 ag-kit init --dry-run      # Preview actions without executing
 ```
 
-## Documentation
+---
 
-- **[Web App Example](https://antigravity-kit-v2.vercel.app/docs/guide/examples/brainstorm)** - Step-by-step guide to creating a web application
-- **[Online Docs](https://antigravity-kit-v2.vercel.app/docs)** - Browse all documentation online
-
-## Buy me coffee
+## Apoie este projeto (Buy me a coffee)
 
 <p align="center">
-  <a href="https://buymeacoffee.com/vudovn">
-    <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me a Coffee" />
-  </a>
-</p>
-
-<p align="center"> - or - </p>
-
-<p align="center">
-  <img src="https://img.vietqr.io/image/mbbank-0779440918-compact.jpg" alt="Buy me coffee" width="200" />
+  <!-- INSTRUÇÕES PARA O QR CODE PIX: -->
+  <!-- 1. Gere seu QR Code Pix em sites como geradordepix.com ou no seu app do banco -->
+  <!-- 2. Salve a imagem na pasta do repositório (ex: pix-fernando.png) -->
+  <!-- 3. Faça o upload dessa imagem para o GitHub (ou coloque a URL direta da imagem aqui) -->
+  <!-- 4. Substitua "COLOQUE_O_LINK_DA_IMAGEM_DO_SEU_QR_CODE_AQUI" pelo link da imagem -->
+  <img src="pix-fernando.png" alt="Apoie com PIX" width="200" />
 </p>
 
 ## License
 
-MIT © Vudovn
+MIT © Fernando Tenguan (Forked from Vudovn)

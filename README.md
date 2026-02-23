@@ -21,16 +21,31 @@ This version has been customized and loaded with powerful external skills to sup
 
 To use this customized fork instead of the original, you need to point the CLI tool to this repository. *(See instructions below on how to do this or use this repository locally).*
 
+## Quick Install
+
+Como este é um repositório customizado (fork), o comando oficial `npx @vudovn/ag-kit init` fará o download da versão original. Para baixar a **sua versão personalizada**, você tem algumas alternativas mais dinâmicas:
+
+### Opção 1: Via NPX (Recomendado)
+Você pode usar a ferramenta `giget` (a mesma que o criador original usa por trás dos panos) para baixar e extrair apenas a pasta `.agent` diretamente do seu repositório para o seu projeto atual:
+
 ```bash
-npx @vudovn/ag-kit init
+npx giget@latest github:fernandotenguan/antigravity-kit-personalizado/.agent .agent --force
 ```
 
-Or install globally:
+### Opção 2: Via Git Clone
+Se preferir, clone o repositório em uma pasta temporária e mova a pasta `.agent` para onde precisar:
 
 ```bash
-npm install -g @vudovn/ag-kit
-ag-kit init
+git clone https://github.com/fernandotenguan/antigravity-kit-personalizado.git
+# Depois, basta copiar a pasta .agent para o seu projeto
 ```
+
+### Opção 3: Modificando a CLI Global
+Se você usa o `ag-kit` frequentemente, pode manter a instalação global e editá-la conforme ensinado.
+1. Instale globalmente: `npm install -g @vudovn/ag-kit`
+2. Abra o arquivo instalado (ex: `C:\Users\ferna\AppData\Roaming\npm\node_modules\@vudovn\ag-kit\bin\index.js`)
+3. Altere a linha `const REPO = 'github:vudovn/antigravity-kit';` para `const REPO = 'github:fernandotenguan/antigravity-kit-personalizado';`.
+4. Em qualquer projeto novo, basta rodar `ag-kit init`.
 
 This installs the `.agent` folder containing all templates into your project.
 

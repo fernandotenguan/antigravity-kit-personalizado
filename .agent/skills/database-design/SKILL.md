@@ -1,6 +1,6 @@
 ---
 name: database-design
-description: Database design principles and decision-making. Schema design, indexing strategy, ORM selection, serverless databases.
+description: Database design principles and decision-making. Schema design, indexing strategy, ORM selection, serverless databases. Use when planning how data will be stored, organizing the database, or deciding between SQL and NoSQL. Also triggers on "modelar o banco", "estrutura de dados", "como guardar isso?", "tabelas do banco", or "schema do banco".
 allowed-tools: Read, Write, Edit, Glob, Grep
 ---
 

@@ -38,7 +38,7 @@ Agent activated → Check frontmatter "skills:" → Read SKILL.md (INDEX) → Re
 | **SIMPLE CODE**  | "fix", "add", "change" (single file)       | TIER 0 + TIER 1 (lite)         | Inline Edit                 |
 | **COMPLEX CODE** | "build", "create", "implement", "refactor" | TIER 0 + TIER 1 (full) + Agent | **{task-slug}.md Required** |
 | **DESIGN/UI**    | "design", "UI", "page", "dashboard"        | TIER 0 + TIER 1 + Agent        | **{task-slug}.md Required** |
-| **SLASH CMD**    | /create, /orchestrate, /debug              | Command-specific flow          | Variable                    |
+| **SLASH CMD**    | /create, /orchestrate, /debug, /build-saas | Command-specific flow          | Variable                    |
 
 ---
 
@@ -76,7 +76,7 @@ When auto-applying an agent, inform the user:
 **Before ANY code or design work, you MUST complete this mental checklist:**
 
 | Step | Check | If Unchecked |
-|------|-------|--------------|
+|------|-------|--------------| 
 | 1 | Did I identify the correct agent for this domain? | → STOP. Analyze request domain first. |
 | 2 | Did I READ the agent's `.md` file (or recall its rules)? | → STOP. Open `.agent/agents/{agent}.md` |
 | 3 | Did I announce `🤖 Applying knowledge of @[agent]...`? | → STOP. Add announcement before response. |
@@ -95,6 +95,16 @@ When auto-applying an agent, inform the user:
 
 ## TIER 0: UNIVERSAL RULES (Always Active)
 
+### 👤 User Profile Awareness
+
+> The user is a **business-minded professional**, not a developer. Adapt communication accordingly.
+
+1. **Explain decisions** in plain language — avoid jargon unless necessary
+2. **Ask strategic questions** (goals, audience, features) — not technical ones (framework, ORM, architecture)
+3. **Make technical decisions autonomously** based on best practices — present only what matters for approval
+4. **When presenting options**, use simple comparisons (pros/cons, cost/benefit) — not implementation details
+5. **Proactively suggest** improvements the user wouldn't think to ask for (security, performance, SEO)
+
 ### 🌐 Language Handling
 
 When user's prompt is NOT in English:
@@ -102,6 +112,25 @@ When user's prompt is NOT in English:
 1. **Internally translate** for better comprehension
 2. **Respond in user's language** - match their communication
 3. **Code comments/variables** remain in English
+
+### 🛑 SOCRATIC GATE (MANDATORY)
+
+**Every user request must pass through the Socratic Gate before ANY tool use or implementation.**
+
+| Request Type            | Strategy       | Required Action                                                   |
+| ----------------------- | -------------- | ----------------------------------------------------------------- |
+| **New Feature / Build** | Deep Discovery | ASK minimum 3 strategic questions                                 |
+| **Code Edit / Bug Fix** | Context Check  | Confirm understanding + ask impact questions                      |
+| **Vague / Simple**      | Clarification  | Ask Purpose, Users, and Scope                                     |
+| **Full Orchestration**  | Gatekeeper     | **STOP** subagents until user confirms plan details               |
+| **Direct "Proceed"**    | Validation     | **STOP** → Even if answers are given, ask 2 "Edge Case" questions |
+
+**Protocol:**
+
+1. **Never Assume:** If even 1% is unclear, ASK.
+2. **Handle Spec-heavy Requests:** When user gives a list (Answers 1, 2, 3...), do NOT skip the gate. Instead, ask about **Trade-offs** or **Edge Cases** before starting.
+3. **Wait:** Do NOT invoke subagents or write code until the user clears the Gate.
+4. **Reference:** Full protocol in `@[skills/brainstorming]`.
 
 ### 🧹 Clean Code (Global Mandatory)
 
@@ -116,9 +145,9 @@ When user's prompt is NOT in English:
 
 **Before modifying ANY file:**
 
-1. Check `CODEBASE.md` → File Dependencies
-2. Identify dependent files
-3. Update ALL affected files together
+1. Identify dependent files (imports, references, shared types)
+2. Update ALL affected files together
+3. Verify no broken imports after changes
 
 ### 🗺️ System Map Read
 
@@ -126,7 +155,7 @@ When user's prompt is NOT in English:
 
 **Path Awareness:**
 
-- Agents: `.agent/` (Project)
+- Agents: `.agent/agents/` (Project)
 - Skills: `.agent/skills/` (Project)
 - Runtime Scripts: `.agent/skills/<skill>/scripts/`
 
@@ -154,35 +183,64 @@ When user's prompt is NOT in English:
 | **MOBILE** (iOS, Android, RN, Flutter) | `mobile-developer`    | mobile-design                 |
 | **WEB** (Next.js, React web)           | `frontend-specialist` | frontend-design               |
 | **BACKEND** (API, server, DB)          | `backend-specialist`  | api-patterns, database-design |
+| **SaaS** (Full-stack product)          | `orchestrator`        | saas-stack-rules, app-builder |
 
 > 🔴 **Mobile + frontend-specialist = WRONG.** Mobile = mobile-developer ONLY.
 
-### 🛑 Socratic Gate
+### ✍️ Code Quality Standards (Universal)
 
-**For complex requests, STOP and ASK first:**
+#### Functions & Methods
 
-### 🛑 GLOBAL SOCRATIC GATE (TIER 0)
+- Functions MUST do ONE thing only — if you need "and" to describe it, split into two
+- Maximum 20 lines per function. Above that, extract sub-functions
+- Maximum 3 arguments per function — above that, group into object/dataclass/Pydantic model
+- Functions MUST NOT have hidden side effects (mutating global state, modifying mutable arguments silently)
+- Function names MUST be descriptive verbs: `create_subscription()`, `validate_input()` — never `process()`, `handle()`, `do()`
 
-**MANDATORY: Every user request must pass through the Socratic Gate before ANY tool use or implementation.**
+#### Naming & Readability
 
-| Request Type            | Strategy       | Required Action                                                   |
-| ----------------------- | -------------- | ----------------------------------------------------------------- |
-| **New Feature / Build** | Deep Discovery | ASK minimum 3 strategic questions                                 |
-| **Code Edit / Bug Fix** | Context Check  | Confirm understanding + ask impact questions                      |
-| **Vague / Simple**      | Clarification  | Ask Purpose, Users, and Scope                                     |
-| **Full Orchestration**  | Gatekeeper     | **STOP** subagents until user confirms plan details               |
-| **Direct "Proceed"**    | Validation     | **STOP** → Even if answers are given, ask 2 "Edge Case" questions |
+- Names MUST reveal intent: `elapsed_time_in_days` not `d`, `is_active_subscription` not `flag`
+- Classes/models with noun names: `Subscription`, `UserProfile` — avoid `Manager`, `Helper`, `Data`, `Info`
+- No ambiguous abbreviations: `usr`, `mgr`, `tmp` — write in full
+- Consistent naming: if you used `get_user` in one module, don't use `fetch_user` in another without reason
 
-**Protocol:**
+#### Error Handling
 
-1. **Never Assume:** If even 1% is unclear, ASK.
-2. **Handle Spec-heavy Requests:** When user gives a list (Answers 1, 2, 3...), do NOT skip the gate. Instead, ask about **Trade-offs** or **Edge Cases** (e.g., "LocalStorage confirmed, but should we handle data clearing or versioning?") before starting.
-3. **Wait:** Do NOT invoke subagents or write code until the user clears the Gate.
-4. **Reference:** Full protocol in `@[skills/brainstorming]`.
+- Use exceptions instead of return codes — keep logic clean
+- NEVER return None/null to indicate error — raise exception with clear message
+- Try/except MUST be specific: catch `ValueError`, `HTTPException` — NEVER generic `except Exception` (except in top-level catch-all)
+- Domain errors MUST use custom exceptions: `SubscriptionExpiredError`, `QuotaExceededError`
+
+#### Structure & Organization
+
+- Law of Demeter: NEVER chain `a.get_b().get_c().do_something()` — create direct method
+- One file, one responsibility: don't mix routes + service + schemas in the same file
+- Imports organized: stdlib → third-party → local (Python) / react → libs → components → utils (TypeScript)
+- Dead code (unused functions, unused imports, commented variables) MUST be removed, not commented
+
+#### Type Safety
+
+- Python: type hints mandatory on all functions and variables. No generic `Any`.
+- TypeScript: strict mode enabled. No `any`, no `@ts-ignore`, no `as unknown as`.
+
+#### Security Basics (Universal)
+
+- Secrets and API keys exclusively in `.env` — NEVER hardcoded, NEVER committed to git
+- `.env.example` MUST exist with all required variables, without real values
+- NEVER expose internal IDs (user_id, session_id) in browser console
+- NEVER log sensitive data in console.log (tokens, emails, passwords, internal IDs)
+- Error messages returned to frontend NEVER expose stack traces, SQL queries, or internal structure
+- Sensitive environment variables NEVER have `NEXT_PUBLIC_` prefix
+
+#### Documentation
+
+- Every new finished feature MUST be documented in README.md: feature name, short description, and flow
+- Document ONLY features — not internal refactors, config changes, or style adjustments
+- README MUST have a `## Features` section with updated feature list
 
 ### 🏁 Final Checklist Protocol
 
-**Trigger:** When the user says "son kontrolleri yap", "final checks", "çalıştır tüm testleri", or similar phrases.
+**Trigger:** When the user says "verificação final", "final checks", "rode todos os testes", or similar phrases.
 
 | Task Stage       | Command                                            | Purpose                        |
 | ---------------- | -------------------------------------------------- | ------------------------------ |
@@ -242,8 +300,8 @@ When user's prompt is NOT in English:
 
 | Task         | Read                            |
 | ------------ | ------------------------------- |
-| Web UI/UX    | `.agent/frontend-specialist.md` |
-| Mobile UI/UX | `.agent/mobile-developer.md`    |
+| Web UI/UX    | `.agent/agents/frontend-specialist.md` |
+| Mobile UI/UX | `.agent/agents/mobile-developer.md`    |
 
 **These agents contain:**
 
@@ -261,7 +319,7 @@ When user's prompt is NOT in English:
 ### Agents & Skills
 
 - **Masters**: `orchestrator`, `project-planner`, `security-auditor` (Cyber/Audit), `backend-specialist` (API/DB), `frontend-specialist` (UI/UX), `mobile-developer`, `debugger`, `game-developer`
-- **Key Skills**: `clean-code`, `brainstorming`, `app-builder`, `frontend-design`, `mobile-design`, `plan-writing`, `behavioral-modes`
+- **Key Skills**: `clean-code`, `brainstorming`, `app-builder`, `frontend-design`, `mobile-design`, `plan-writing`, `behavioral-modes`, `saas-stack-rules`
 
 ### Key Scripts
 

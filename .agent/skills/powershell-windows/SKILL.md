@@ -1,6 +1,6 @@
 ---
 name: powershell-windows
-description: PowerShell Windows patterns. Critical pitfalls, operator syntax, error handling.
+description: PowerShell Windows patterns. Critical pitfalls, operator syntax, error handling. Use when running commands on Windows systems or writing PowerShell scripts.
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash
 ---
 

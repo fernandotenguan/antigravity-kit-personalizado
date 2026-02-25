@@ -1,6 +1,6 @@
 ---
 name: webapp-testing
-description: Web application testing principles. E2E, Playwright, deep audit strategies.
+description: Web application testing principles. E2E, Playwright, deep audit strategies. Use when you want to verify the entire app works end-to-end, simulate real user flows, or ensure nothing breaks. Also triggers on "testar o app inteiro", "simular um usuário", "verificar fluxo completo", or "testar antes de publicar".
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash
 ---
 

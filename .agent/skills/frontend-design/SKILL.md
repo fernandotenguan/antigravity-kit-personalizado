@@ -1,6 +1,6 @@
 ---
 name: frontend-design
-description: Design thinking and decision-making for web UI. Use when designing components, layouts, color schemes, typography, or creating aesthetic interfaces. Teaches principles, not fixed values.
+description: Design thinking and decision-making for web UI. Use when designing pages, improving visual appearance, choosing colors, changing layout, or making things look better. Also triggers on "melhorar o visual", "mudar as cores", "redesign", "tá feio", "quero mais bonito", "interface premium", or "design moderno".
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash
 ---
 

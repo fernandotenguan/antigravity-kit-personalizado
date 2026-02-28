@@ -1,159 +1,183 @@
-# Antigravity Kit (Custom Fork by Fernando Tenguan)
+# Antigravity Kit
+**Custom Fork by FernandoTenguan**
 
-> AI Agent templates with Skills, Agents, and Workflows
-> **Custom Version:** Enhanced with Vercel, Claude, and React optimizations.
-
-## 🚀 What's New in this Fork?
-
-This version has been customized and loaded with powerful external skills to supercharge your development workflow:
-
-- **@rmyndharis/antigravity-skills**: Additional community-driven agent skills.
-- **vercel-labs/agent-skills**:
-  - `vercel-react-best-practices`: React and Next.js performance optimizations based on Vercel Engineering standards.
-  - `web-design-guidelines`: Web interface guidelines compliance, accessibility checks, and UX audits.
-- **anthropics/claude-code**:
-  - `frontend-design`: Advanced design thinking, UI/UX decision making, and aesthetic configurations.
-- **Included Files**: The `skills_guide.md` is now shipped by default when initiating this kit.
+> A collection of AI agent templatescomplete with Skills, Agents, and Workflows
+> optimized for web developers, designers and teams.
+>
+> **This fork adds:** Vercel & Claude enhancements, React performance guidelines,
+> and other communitydriven skills.
 
 ---
 
-## Quick Install
+##  Project Overview
 
-To use this customized fork instead of the original, you need to point the CLI tool to this repository. *(See instructions below on how to do this or use this repository locally).*
+The Antigravity Kit is a starting point for building powerful AIassisted
+development workflows. You can plug it into any JavaScript/TypeScript project to
+get:
 
-## Quick Install
+- **Agents**  specialized AI personas (frontend dev, backend dev, security
+  auditor, etc.).
+- **Skills**  domain knowledge modules that teach agents how to perform tasks.
+- **Workflows**  slashcommand procedures that orchestrate agents in common
+  scenarios.
 
-Como este é um repositório customizado (fork), o comando oficial `npx @vudovn/ag-kit init` fará o download da versão original. Para baixar a **sua versão personalizada**, você tem algumas alternativas mais dinâmicas:
+This custom fork extends the original with:
 
-### Opção 1: Via NPX (Recomendado)
-Você pode usar a ferramenta `giget` (a mesma que o criador original usa por trás dos panos) para baixar e extrair apenas a pasta `.agent` diretamente do seu repositório para o seu projeto atual:
+- Extra community skills (`@rmyndharis/antigravity-skills`)
+- Vercelapproved React/Next.js best practices and web design guidelines
+- Claudepowered frontend design reasoning
+- Prebundled `skills_guide.md` for immediate reference
+
+---
+
+##  What's Included
+
+| Component     | Count | Description                                                        |
+| ------------- | ----- | ------------------------------------------------------------------ |
+| **Agents**    | 20    | Specialist AI personas (frontend, backend, security, PM, QA, etc.) |
+| **Skills**    | 40+   | Domainspecific knowledge modules (including Vercel & Claude)       |
+| **Workflows** | 11    | Slashcommand procedures for common tasks                          |
+
+---
+
+##  Installation
+
+This fork must be installed manually, since the official CLI defaults to the
+upstream repository.
+
+### Option 1  NPX (recommended)
 
 ```bash
 npx giget@latest github:fernandotenguan/antigravity-kit-personalizado/.agent .agent --force
 ```
 
-### Opção 2: Via Git Clone
-Se preferir, clone o repositório em uma pasta temporária e mova a pasta `.agent` para onde precisar:
+> `giget` downloads and extracts only the `.agent` folder into your project.
+
+### Option 2  Git clone
 
 ```bash
 git clone https://github.com/fernandotenguan/antigravity-kit-personalizado.git
-# Depois, basta copiar a pasta .agent para o seu projeto
+# then copy the .agent directory into your project
 ```
 
-### Opção 3: Modificando a CLI Global
-Se você usa o `ag-kit` frequentemente, pode manter a instalação global e editá-la conforme ensinado.
-1. Instale globalmente: `npm install -g @vudovn/ag-kit`
-2. Abra o arquivo instalado (ex: `C:\Users\ferna\AppData\Roaming\npm\node_modules\@vudovn\ag-kit\bin\index.js`)
-3. Altere a linha `const REPO = 'github:vudovn/antigravity-kit';` para `const REPO = 'github:fernandotenguan/antigravity-kit-personalizado';`.
-4. Em qualquer projeto novo, basta rodar `ag-kit init`.
+### Option 3  Modify the global CLI
 
-This installs the `.agent` folder containing all templates into your project.
+1. `npm install -g @vudovn/ag-kit`
+2. Open the installed binary (e.g. `.../node_modules/@vudovn/ag-kit/bin/index.js`)
+3. Change
+   ```js
+   const REPO = 'github:vudovn/antigravity-kit';
+   ```
+   to
+   ```js
+   const REPO = 'github:fernandotenguan/antigravity-kit-personalizado';
+   ```
+4. Use `ag-kit init` as usual.
 
-### ⚠️ Important Note on `.gitignore`
-If you are using AI-powered editors like **Cursor** or **Windsurf**, adding the `.agent/` folder to your `.gitignore` may prevent the IDE from indexing the workflows. This results in slash commands (like `/plan`, `/debug`) not appearing in the chat suggestion dropdown.
+> **Note:** the `.agent` folder should **not** be added to your projects
+> `.gitignore` if you want AIpowered editors like Cursor or Windsurf to index
+> workflows. Instead, add it to `.git/info/exclude` so it remains local but
+> accessible.
 
-**Recommended Solution:**
-To keep the `.agent/` folder local (not tracked by Git) while maintaining AI functionality:
-1. Ensure `.agent/` is **NOT** in your project's `.gitignore`.
-2. Instead, add it to your local exclude file: `.git/info/exclude`
+---
 
-## What's Included
+##  Usage
 
-| Component     | Count | Description                                                        |
-| ------------- | ----- | ------------------------------------------------------------------ |
-| **Agents**    | 20    | Specialist AI personas (frontend, backend, security, PM, QA, etc.) |
-| **Skills**    | 40+   | Domain-specific knowledge modules (Including Vercel & Claude)      |
-| **Workflows** | 11    | Slash command procedures                                           |
+### Agents
 
-## Usage
+Describe your need and the system:
 
-### Using Agents
-
-**No need to mention agents explicitly!** The system automatically detects and applies the right specialist(s):
+1. Analyzes your request
+2. Detects relevant domain(s)
+3. Selects the best agent(s)
+4. Reports which specialist(s) are at work
 
 ```
 You: "Add JWT authentication"
-AI: 🤖 Applying @security-auditor + @backend-specialist...
+AI:  Applying @security-auditor + @backend-specialist...
 
 You: "Fix the dark mode button"
-AI: 🤖 Using @frontend-specialist...
+AI:  Using @frontend-specialist...
 
 You: "Login returns 500 error"
-AI: 🤖 Using @debugger for systematic analysis...
+AI:  Using @debugger for systematic analysis...
 ```
 
-**How it works:**
-- Analyzes your request silently
-- Detects domain(s) automatically (frontend, backend, security, etc.)
-- Selects the best specialist(s)
-- Informs you which expertise is being applied
-- You get specialist-level responses without needing to know the system architecture
-
 **Benefits:**
-- ✅ Zero learning curve - just describe what you need
-- ✅ Always get expert responses
-- ✅ Transparent - shows which agent is being used
-- ✅ Can still override by mentioning agent explicitly
+-  Zero learning curve
+-  Expertlevel responses
+-  Transparent agent selection
+-  Manual override via `@agent-name`
 
-### Using Workflows
+### Workflows
 
-Invoke workflows with slash commands:
+Invoke slash commands for structured procedures:
 
-| Command          | Description                           |
-| ---------------- | ------------------------------------- |
-| `/brainstorm`    | Explore options before implementation |
-| `/create`        | Create new features or apps           |
-| `/debug`         | Systematic debugging                  |
-| `/deploy`        | Deploy application                    |
-| `/enhance`       | Improve existing code                 |
-| `/orchestrate`   | Multi-agent coordination              |
-| `/plan`          | Create task breakdown                 |
-| `/preview`       | Preview changes locally               |
-| `/status`        | Check project status                  |
-| `/test`          | Generate and run tests                |
-| `/ui-ux-pro-max` | Design with 50 styles                 |
+| Command          | Purpose                                  |
+| ---------------- | ---------------------------------------- |
+| `/brainstorm`    | Explore options before implementing      |
+| `/create`        | Scaffold features or applications        |
+| `/debug`         | Systematic debugging                     |
+| `/deploy`        | Deploy the app                           |
+| `/enhance`       | Improve existing code                    |
+| `/orchestrate`   | Coordinate multiple agents               |
+| `/plan`          | Break tasks into actionable steps        |
+| `/preview`       | Preview changes locally                  |
+| `/status`        | Check project health                     |
+| `/test`          | Generate and run tests                   |
+| `/ui-ux-pro-max` | Produce UI/UX designs in 50 styles       |
 
-Example:
+_Example:_
+
 ```
 /brainstorm authentication system
 /create landing page with hero section
 /debug why login fails
 ```
 
-### Using Skills
+### Skills
 
-Skills are loaded automatically based on task context. The AI reads skill descriptions and applies relevant knowledge.
+Skills load automatically based on context; the AI reads each description and
+applies relevant knowledge.
 
-## CLI Tool
+### CLI Tools
 
 | Command         | Description                               |
 | --------------- | ----------------------------------------- |
-| `ag-kit init`   | Install `.agent` folder into your project |
-| `ag-kit update` | Update to the latest version              |
-| `ag-kit status` | Check installation status                 |
+| `ag-kit init`   | Install the `.agent` folder               |
+| `ag-kit update` | Refresh to the latest version             |
+| `ag-kit status` | Display installation status               |
 
-### Options
+**Options:**
 
 ```bash
-ag-kit init --force        # Overwrite existing .agent folder
-ag-kit init --path ./myapp # Install in specific directory
-ag-kit init --quiet        # Suppress output (for CI/CD)
-ag-kit init --dry-run      # Preview actions without executing
+ag-kit init --force        # overwrite existing .agent
+ag-kit init --path ./app   # install to a specific directory
+ag-kit init --quiet        # minimal output (useful for CI)
+ag-kit init --dry-run      # show actions without executing
 ```
 
 ---
 
-## Apoie este projeto (Buy me a coffee)
+##  Support the Project
+
+> **Buy me a coffee**
 
 <p align="center">
-  <!-- INSTRUÇÕES PARA O QR CODE PIX: -->
-  <!-- 1. Gere seu QR Code Pix em sites como geradordepix.com ou no seu app do banco -->
-  <!-- 2. Salve a imagem na pasta do repositório (ex: pix-fernando.png) -->
-  <!-- 3. Faça o upload dessa imagem para o GitHub (ou coloque a URL direta da imagem aqui) -->
-  <!-- 4. Substitua "COLOQUE_O_LINK_DA_IMAGEM_DO_SEU_QR_CODE_AQUI" pelo link da imagem -->
+  <!-- INSTRUCTIONS FOR PIX QR CODE: -->
+  <!-- 1. Generate a PIX QR code using sites like geradordepix.com or your banking app -->
+  <!-- 2. Save the image in the repo (e.g. pix-fernando.png) -->
+  <!-- 3. Upload it to GitHub or use a direct URL here -->
   <img src="pix-fernando.png" alt="Apoie com PIX" width="200" />
 </p>
 
-## License
+---
 
-MIT © Fernando Tenguan (Forked from Vudovn)
+##  License
+
+MIT  FernandoTenguan  
+(Forked from Vudovns original project)
+
+---
+
+> _Thank you for exploring this custom Antigravity Kit  build smarter, faster, and with confidence!_

@@ -35,24 +35,22 @@ graph TD
 
 **Use this matrix to automatically select agents:**
 
-| User Intent         | Keywords                                   | Selected Agent(s)                           | Auto-invoke? |
-| ------------------- | ------------------------------------------ | ------------------------------------------- | ------------ |
-| **Authentication**  | "login", "auth", "signup", "password"      | `security-auditor` + `backend-specialist`   | ✅ YES       |
-| **UI Component**    | "button", "card", "layout", "style"        | `frontend-specialist`                       | ✅ YES       |
-| **Mobile UI**       | "screen", "navigation", "touch", "gesture" | `mobile-developer`                          | ✅ YES       |
-| **API Endpoint**    | "endpoint", "route", "API", "POST", "GET"  | `backend-specialist`                        | ✅ YES       |
-| **Database**        | "schema", "migration", "query", "table"    | `database-architect` + `backend-specialist` | ✅ YES       |
-| **Bug Fix**         | "error", "bug", "not working", "broken"    | `debugger`                                  | ✅ YES       |
-| **Test**            | "test", "coverage", "unit", "e2e"          | `test-engineer`                             | ✅ YES       |
-| **Deployment**      | "deploy", "production", "CI/CD", "docker"  | `devops-engineer`                           | ✅ YES       |
-| **Security Review** | "security", "vulnerability", "exploit"     | `security-auditor` + `penetration-tester`   | ✅ YES       |
-| **Performance**     | "slow", "optimize", "performance", "speed" | `performance-optimizer`                     | ✅ YES       |
-| **Product Def**     | "requirements", "user story", "backlog", "MVP" | `product-owner`                         | ✅ YES       |
-| **Kit Health**      | "doctor", "diagnóstico", "checar kit", "kit integridade", "saúde do kit" | *(scripts diretos)* `python .agent/scripts/doctor.py` | ✅ YES |
-| **ADE Pipeline**    | "/ade", "pipeline autônomo", "autonomous pipeline", "req para código" | `orchestrator` via `/ade` workflow | ✅ YES |
-| **Memory Layer**    | "lições aprendidas", "lessons", "gotchas", "memory" | Consultar `.agent/memory/` antes de responder | ✅ YES |
-| **New Feature**     | "build", "create", "implement", "new app"  | `orchestrator` → multi-agent                | ⚠️ ASK FIRST |
-| **Complex Task**    | Multiple domains detected                  | `orchestrator` → multi-agent                | ⚠️ ASK FIRST |
+| User Intent         | Keywords (EN / PT)                                           | Selected Agent(s)                           | Auto-invoke? |
+| ------------------- | ------------------------------------------------------------ | ------------------------------------------- | ------------ |
+| **Authentication**  | "login", "auth", "signup", "password" / "senha", "cadastro", "autenticação" | `security-auditor` + `backend-specialist`   | ✅ YES       |
+| **UI Component**    | "button", "card", "layout", "style" / "botão", "cartão", "visual", "estilo" | `frontend-specialist`                       | ✅ YES       |
+| **Mobile UI**       | "screen", "navigation", "touch" / "tela", "navegação", "toque", "celular" | `mobile-developer`                          | ✅ YES       |
+| **API Endpoint**    | "endpoint", "route", "API" / "rota", "servidor", "conectar front" | `backend-specialist`                        | ✅ YES       |
+| **Database**        | "schema", "query", "table" / "banco de dados", "tabela", "estrutura" | `database-architect` + `backend-specialist` | ✅ YES       |
+| **Bug Fix**         | "error", "bug", "broken" / "erro", "quebrado", "não funciona", "bug" | `debugger`                                  | ✅ YES       |
+| **Test**            | "test", "coverage", "unit" / "testar", "validar", "cobertura", "testes" | `test-engineer`                             | ✅ YES       |
+| **Deployment**      | "deploy", "CI/CD", "docker" / "publicar", "colocar no ar", "subir site" | `devops-engineer`                           | ✅ YES       |
+| **Security Review** | "security", "vulnerability" / "seguro", "vulnerabilidade", "ataque" | `security-auditor` + `penetration-tester`   | ✅ YES       |
+| **Performance**     | "slow", "optimize", "speed" / "lento", "rápido", "otimizar", "velocidade" | `performance-optimizer`                     | ✅ YES       |
+| **Product Def**     | "requirements", "MVP" / "requisitos", "ideia", "funcionalidades" | `product-owner`                             | ✅ YES       |
+| **Kit Health**      | "doctor", "diagnóstico", "checar kit" / "saúde", "integridade", "tá tudo certo" | *(scripts)* `doctor.py`                      | ✅ YES       |
+| **ADE Pipeline**    | "/ade", "pipeline autônomo" / "fazer tudo", "implementar autônomo" | `orchestrator` via `/ade`                   | ✅ YES       |
+| **Memory Layer**    | "lessons", "gotchas", "memory" / "lições", "aprendemos", "evitar erro" | Consultar `.agent/memory/`                  | ✅ YES       |
 
 ### 3. Automatic Routing Protocol
 

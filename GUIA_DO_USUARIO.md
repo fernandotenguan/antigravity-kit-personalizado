@@ -1,30 +1,58 @@
-# 🚀 Guia do Usuário — Antigravity Kit
+## 🛤️ Roteiro: Por Onde Começar?
 
-> **Para quem é este guia:** Pessoas de negócio que querem construir projetos com qualidade profissional,
-> sem precisar saber programar. O agente cuida da parte técnica — você cuida da visão.
+Escolha o seu momento atual e siga a recomendação da "Equipe Profissional":
+
+### 1️⃣ "Ainda não tenho a pasta do projeto criada"
+*   **Comando:** `/new-project`
+*   **Por que:** Ele é o único comando que você usa **neste kit base**. Ele vai te dar o "mapa" e os comandos de terminal para você criar sua nova pasta e levar a inteligência para lá.
+
+### 2️⃣ "Já estou na pasta nova, mas minha ideia ainda é vaga"
+*   **Comando:** `/brainstorm`
+*   **Por que:** Antes de gastar tempo criando arquivos, use o consultor. Ele vai te fazer perguntas sobre público-alvo, problema que você resolve e funcionalidades essenciais. É a fase de **concepção**.
+
+### 3️⃣ "Minha ideia está clara, quero desenhar o sistema"
+*   **Comando:** `/build-saas` (para sistemas complexos) ou `/plan` (para uma funcionalidade específica)
+*   **Por que:** Aqui o Arquiteto entra em cena. Ele cria os documentos técnicos (os "mapas da obra") que descrevem como o banco de dados e as telas vão funcionar. **Não escreve código ainda.**
+
+### 4️⃣ "Quero que o agente faça tudo sozinho (Mãos livres)"
+*   **Comando:** `/ade` [descreva sua ideia aqui]
+*   **Por que:** É o modo "Piloto Automático". O agente vai entender sua ideia, criar a especificação e só vai te chamar para você dar seu **"DE ACORDO"** na Fase 3 antes de começar a codar.
+
+### 5️⃣ "Quero construir junto com o agente (Interativo)"
+*   **Comando:** `/create`
+*   **Por que:** Ideal para quem quer ver o processo acontecer passo a passo. O agente vai conversando com você enquanto cria as pastas e os primeiros arquivos.
+
+---
+
+## 🗺️ Tabela Mestre: Como Chamar a Equipe
+
+Use esta tabela para saber quem chamar ou qual comando usar. **Lembre-se:** você pode apenas falar naturalmente em Português, e o kit escolherá o especialista certo!
+
+| Especialista / Ferramenta | O que ele faz? | Como chamar (Exemplos) |
+|:---|:---|:---|
+| **🎨 Designer Frontend** | Visual, cores, layout, botões | "@frontend-specialist: melhora o visual", "dark mode" |
+| **⚙️ Arquiteto Backend** | Servidor, API, regras de negócio | "@backend-specialist: cria uma rota", "conecta o front" |
+| **💾 Arquiteto de Banco** | Organização e estrutura de dados | "@database-architect: cria uma tabela de usuários" |
+| **🔍 Detetive (Debugger)** | Conserta erros e bugs | "@debugger: o login não funciona", "erro 404" |
+| **🛡️ Auditor de Segurança** | Protege o app e checa invasões | "@security-auditor: o site está seguro?", "criptografia" |
+| **🚀 Autônomo (/ade)** | Faz uma tarefa completa sozinho | `/ade crie um sistema de login com Google` |
+| **🏗️ Construtor (/create)** | Cria algo novo do zero | `/create dashboard de vendas` |
+| **🧠 Planejador (/plan)** | Planeja antes de codar | `/plan novo sistema de pagamentos` |
+| **🏥 Médico (Doctor)** | Checa se sua IA está "saudável" | `checar kit`, `diagnóstico`, `doctor` |
+| **🧪 Testador** | Garante que tudo funciona (QA) | `/test`, `validar projeto`, `roteiro de testes` |
 
 ---
 
 ## 🎯 Como o Agente Funciona (Em 30 Segundos)
 
-Pense no agente como uma **equipe de especialistas** que trabalha para você automaticamente:
+Pense neste kit como uma **equipe de desenvolvimento de elite** composta por 20 especialistas que trabalham para você simultaneamente. 
 
-| Você diz... | O agente ativa... | Resultado |
-|-------------|-------------------|-----------|
-| "Quero criar um SaaS" | 🏗️ Arquiteto + Backend + Frontend | Planejamento completo + código |
-| "O login tá dando erro" | 🔍 Debugger | Diagnóstico e correção |
-| "Melhora o visual dessa página" | 🎨 Designer Frontend | Interface premium |
-| "Tá seguro pra ir pro ar?" | 🛡️ Auditor de Segurança | Checklist de segurança |
-| "Checar kit" / "tudo certo?" | 🏥 Doctor do Kit | Diagnóstico completo |
-| "/ade criar uma nova funcionalidade" | 🤖 Pipeline Autônomo | Feature completa end-to-end |
+### Iniciar um Novo Projeto
+Se você quer começar **um novo aplicativo, site ou jogo** do zero, use este comando:
 
-**Você NÃO precisa:**
-- ❌ Saber qual agente usar
-- ❌ Escolher frameworks ou bibliotecas
-- ❌ Entender termos técnicos
-- ❌ Dizer "use React" ou "use Python"
-
-**O agente decide a melhor tecnologia automaticamente.**
+| Comando | O que Faz |
+|---------|-----------|
+| `/new-project` | **Clone Inteligente** — Transfere toda a inteligência desta base para uma nova pasta vazia. |
 
 ---
 

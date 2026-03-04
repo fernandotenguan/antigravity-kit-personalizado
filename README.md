@@ -64,9 +64,26 @@ Export the kit configuration to Claude Code, Cursor, and Codex CLI:
 python .agent/scripts/sync_ide.py --target all
 ```
 
+## 🚀 Como Iniciar um Novo Projeto (Sua Fábrica)
+
+Este repositório é seu **Cérebro de Desenvolvimento**. Para criar um novo projeto (ex: Lotofácil, E-commerce, App Mobile) usando esta inteligência:
+
+1.  **Crie sua nova pasta** no computador.
+2.  **No chat do seu agente**, digite: 
+    ```
+    /new-project
+    ```
+3.  O agente vai te guiar na cópia do `.agent/` (a "alma" do kit) e na configuração inicial da sua nova aplicação.
+
 ---
 
-## Installation
+## 📜 Regras de Manutenção
+Se você é um desenvolvedor ou quer que o agente atualize este kit base (fork), ele deve SEMPRE seguir as:
+[Regras de Manutenção e Evolução (KIT_MASTER_RULES.md)](file:///c:/Users/ferna/Desktop/IA%20Project/antigravity-kit-personalizado/KIT_MASTER_RULES.md)
+
+---
+
+## What's Included
 
 > **Requirements:** Python 3.9+ and Git
 

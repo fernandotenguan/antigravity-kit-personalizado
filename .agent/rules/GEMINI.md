@@ -31,16 +31,16 @@ Agent activated → Check frontmatter "skills:" → Read SKILL.md (INDEX) → Re
 
 **Before ANY action, classify the request:**
 
-| Request Type     | Trigger Keywords                           | Active Tiers                   | Result                      |
-| ---------------- | ------------------------------------------ | ------------------------------ | --------------------------- |
-| **QUESTION**     | "what is", "how does", "explain"           | TIER 0 only                    | Text Response               |
-| **SURVEY/INTEL** | "analyze", "list files", "overview"        | TIER 0 + Explorer              | Session Intel (No File)     |
-| **SIMPLE CODE**  | "fix", "add", "change" (single file)       | TIER 0 + TIER 1 (lite)         | Inline Edit                 |
-| **COMPLEX CODE** | "build", "create", "implement", "refactor" | TIER 0 + TIER 1 (full) + Agent | **{task-slug}.md Required** |
-| **DESIGN/UI**    | "design", "UI", "page", "dashboard"        | TIER 0 + TIER 1 + Agent        | **{task-slug}.md Required** |
-| **SLASH CMD**    | /create, /orchestrate, /debug, /build-saas, /ade | Command-specific flow          | Variable                    |
-| **KIT HEALTH**   | "doctor", "diagnóstico", "kit integridade", "checar kit" | TIER 0 + Scripts     | `python .agent/scripts/doctor.py` |
-| **ADE PIPELINE** | /ade, "pipeline autônomo", "autonomous"    | TIER 0 + orchestrator + /ade   | ADE Workflow                |
+| Request Type     | Trigger Keywords (EN / PT)                                    | Active Tiers                   | Result                      |
+| ---------------- | ------------------------------------------------------------ | ------------------------------ | --------------------------- |
+| **QUESTION**     | "what is", "how does", "explain" / "o que é", "como", "explique" | TIER 0 only                    | Text Response               |
+| **SURVEY/INTEL** | "analyze", "list files", "overview" / "analise", "listar", "visão geral" | TIER 0 + Explorer              | Session Intel (No File)     |
+| **SIMPLE CODE**  | "fix", "add", "change" / "corrija", "adicione", "mude"       | TIER 0 + TIER 1 (lite)         | Inline Edit                 |
+| **COMPLEX CODE** | "build", "create", "implement", "refactor" / "construa", "crie", "implemente", "refatore" | TIER 0 + TIER 1 (full) + Agent | **{task-slug}.md Required** |
+| **DESIGN/UI**    | "design", "UI", "page", "dashboard" / "visual", "tela", "página", "interface" | TIER 0 + TIER 1 + Agent        | **{task-slug}.md Required** |
+| **SLASH CMD**    | /create, /orchestrate, /debug, /build-saas, /ade             | Command-specific flow          | Variable                    |
+| **KIT HEALTH**   | "doctor", "diagnóstico", "kit integridade", "checar kit"     | TIER 0 + Scripts               | `python .agent/scripts/doctor.py` |
+| **ADE PIPELINE** | /ade, "pipeline autônomo", "autonomous"                      | TIER 0 + orchestrator + /ade   | ADE Workflow                |
 
 ---
 
@@ -160,13 +160,16 @@ If the user says any of the following, **immediately stop all in-progress action
 4. **When presenting options**, use simple comparisons (pros/cons, cost/benefit) — not implementation details
 5. **Proactively suggest** improvements the user wouldn't think to ask for (security, performance, SEO)
 
-### 🌐 Language Handling
+### 🌐 Language Handling & Technical Bilingualism
+**Constraint: Full support for PT-BR and EN.**
 
-When user's prompt is NOT in English:
-
-1. **Internally translate** for better comprehension
-2. **Respond in user's language** - match their communication
-3. **Code comments/variables** remain in English
+1. **Detection**: Identify user language naturally. If the user mixes languages (e.g., "faz o deploy do meu front"), prioritize the primary sentence structure (PT-BR).
+2. **Technical Terms**: Maintain technical terms in English when they are industry standard (e.g., "API", "Middleware", "Hooks", "Deploy"), but explain them in the user's language if asked.
+3. **Response**: 
+   - User speaks PT-BR → Respond in PT-BR.
+   - User speaks EN → Respond in EN.
+4. **Internal Logic**: Use English for internal variables, code comments, and project documentation (unless requested otherwise by the user) to maintain global compatibility.
+5. **Cultural Adaptation**: When in PT-BR, adapt business terms (e.g., "User Story" → "História de Usuário", "Backlog" → "Lista de tarefas/Backlog").
 
 ### 🛑 SOCRATIC GATE (MANDATORY)
 

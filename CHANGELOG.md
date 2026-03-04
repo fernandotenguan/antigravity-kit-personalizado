@@ -8,7 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
-## [2.0.2] - 2026-02-04
+### [2.1.0] - 2026-03-04
+- **ADD**: Novo documento de governança de IA: `KIT_MASTER_RULES.md`.
+- **ADD**: Novo workflow interativo `/new-project` para guiar a criação de novos sistemas.
+- **DOC**: Atualização completa do `README.md` e `GUIA_DO_USUARIO.md` com foco em usuários de negócio.
+- **CLEAN**: Remoção de subpasta redundante `antigravity-kit-personalizado` que causava confusão de nomes.
+- **IMPROVE**: Refinamento do script `doctor.py` e validação de saúde do kit.
+
+### [2.0.0] - 2026-03-01
 - **New Skills**:
     - `rust-pro` - Master Rust 1.75+ 
 - **Agent Workflows**:

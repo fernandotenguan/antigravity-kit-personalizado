@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+### [2.2.0] - 2026-03-04
+- **ADD**: Importação de 9 novas skills estratégicas do repositório `antigravity-awesome-skills`.
+- **ADD**: Pacote "Estratégia e Memória": `00-andruia-consultant`, `agent-memory-mcp`, `agent-evaluation`, `agent-orchestration-multi-agent-optimize`.
+- **ADD**: Pacote "IA Preditiva Pro": `ai-engineer`, `machine-learning-ops-ml-pipeline`.
+- **ADD**: Pacote "SaaS & Business": `micro-saas-launcher`, `startup-analyst`, `20-andruia-niche-intelligence`.
+- **IMPROVE**: Tradução bilingue (PT-BR/EN) para a série de agentes Andruia.
+- **DOC**: Atualização do `README.md` e `GUIA_DO_USUARIO.md` refletindo o novo total de 47 skills.
+
 ### [2.1.0] - 2026-03-04
 - **ADD**: Novo documento de governança de IA: `KIT_MASTER_RULES.md`.
 - **ADD**: Novo workflow interativo `/new-project` para guiar a criação de novos sistemas.

@@ -96,9 +96,33 @@ Estes são atalhos que ativam workflows prontos. Digite diretamente no chat:
 
 | Comando | Quando Usar | O que Faz |
 |---------|-------------|-----------|
-| `checar kit` | Antes de qualquer trabalho importante | Diagnóstico completo do kit (20 agentes, 38 skills) |
+| `checar kit` | Antes de qualquer trabalho importante | Diagnóstico completo do kit (20 agentes, 47 skills) |
 | `verificação final` | Antes de publicar | Roda todos os testes em sequência |
 | `rode todos os testes` | Após fazer mudanças | Garante que nada quebrou |
+
+---
+
+## 💎 Pacotes de Expansão (Novos Poderes)
+
+Agora seu kit conta com 3 novos pacotes de inteligência estratégica importados do repositório *Awesome Skills*:
+
+### 1. 🧠 Estratégia e Memória (The Andruia Series)
+*Transforma o agente de um "codificador" em um "consultor de negócios".*
+- **`00-andruia-consultant`**: Atua como Arquiteto de Soluções para planejar roadmap de IA.
+- **`agent-memory-mcp`**: Permite que o agente tenha memória persistente de longo prazo (Contexto Infinito).
+- **`agent-evaluation`**: Audita a qualidade e confiabilidade de cada entrega da IA.
+
+### 2. 📊 IA Preditiva Pro (Coração do Projeto)
+*Ideal para o Radar Preditivo e análise estatística de loterias.*
+- **`predictive-modeling`**: Padrões avançados para predição e séries temporais.
+- **`ai-engineer`**: Refinamento de modelos neurais e algoritmos de predição.
+- **`machine-learning-ops`**: Cria esteiras automáticas de re-treinamento de dados.
+
+### 3. 💰 SaaS & Business Launcher
+*Para quem quer transformar a ferramenta em um produto real.*
+- **`micro-saas-launcher`**: Facilita a criação de MVPs voltados para o mercado.
+- **`startup-analyst`**: Analisa métricas de negócio (CAC, LTV, Burn Rate).
+- **`20-andruia-niche-intelligence`**: Pesquisa profunda sobre o mercado de loterias e apostas.
 
 ---
 

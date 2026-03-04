@@ -5,7 +5,7 @@
 
 [![Kit Version](https://img.shields.io/badge/Kit-v2.0.0-blue)](https://github.com/fernandotenguan/antigravity-kit-personalizado)
 [![Agents](https://img.shields.io/badge/Agents-20-green)](https://github.com/fernandotenguan/antigravity-kit-personalizado)
-[![Skills](https://img.shields.io/badge/Skills-38+-orange)](https://github.com/fernandotenguan/antigravity-kit-personalizado)
+[![Skills](https://img.shields.io/badge/Skills-47-orange)](https://github.com/fernandotenguan/antigravity-kit-personalizado)
 [![Tests](https://img.shields.io/badge/Tests-Automated-brightgreen)](https://github.com/fernandotenguan/antigravity-kit-personalizado)
 
 ---
@@ -15,7 +15,7 @@
 | Component         | Count | Description                                                        |
 | ----------------- | ----- | ------------------------------------------------------------------ |
 | **Agents**        | 20    | Specialist AI personas (frontend, backend, security, game dev, etc.) |
-| **Skills**        | 38+   | Domain-specific knowledge modules with automated scripts           |
+| **Skills**        | 47    | Domain-specific knowledge modules with automated scripts           |
 | **Workflows**     | 13    | Slash-command procedures including the autonomous `/ade` pipeline  |
 | **Master Scripts**| 4     | `doctor.py`, `checklist.py`, `verify_all.py`, `sync_ide.py`        |
 | **Kit Tests**     | ✅     | Automated pytest suite — runs before every commit                  |
@@ -50,7 +50,7 @@ The most powerful mode. You describe a feature, the kit plans it, shows you the 
 ```bash
 python .agent/scripts/doctor.py
 ```
-Validates all 20 agents, 38+ skills, 13 workflows, and master scripts in seconds.
+Validates all 20 agents, 47 skills, 13 workflows, and master scripts in seconds.
 
 ### 🔒 Automated Pre-Commit Guard
 Tests run automatically before every `git commit`. If anything breaks, the commit is blocked until fixed.
@@ -271,7 +271,7 @@ User request
 project-root/
 ├── .agent/
 │   ├── agents/          # 20 specialist AI personas
-│   ├── skills/          # 38+ knowledge modules
+│   ├── skills/          # 47 knowledge modules
 │   ├── workflows/       # 13 slash-command procedures
 │   ├── scripts/         # master validation scripts
 │   │   ├── doctor.py          # kit health check

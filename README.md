@@ -1,187 +1,296 @@
-# Antigravity Kit
+# Antigravity Kit — Personalized by FernandoTenguan
 
-**Custom Fork by FernandoTenguan**
+> A production-grade AI agent framework for building software with professional quality —
+> without needing to know how to code.
 
-> A collection of AI agent templatescomplete with Skills, Agents, and Workflows
-> optimized for web developers, designers and teams.
->
-> **This fork adds:** Vercel & Claude enhancements, React performance guidelines,
-> and other communitydriven skills.
-
----
-
-## Project Overview
-
-The Antigravity Kit is a starting point for building powerful AIassisted
-development workflows. You can plug it into any JavaScript/TypeScript project to
-get:
-
-- **Agents** specialized AI personas (frontend dev, backend dev, security
-  auditor, etc.).
-- **Skills** domain knowledge modules that teach agents how to perform tasks.
-- **Workflows** slashcommand procedures that orchestrate agents in common
-  scenarios.
-
-This custom fork extends the original with:
-
-- Extra community skills (`@rmyndharis/antigravity-skills`)
-- Vercelapproved React/Next.js best practices and web design guidelines
-- Claudepowered frontend design reasoning
-- Prebundled `skills_guide.md` for immediate reference
+[![Kit Version](https://img.shields.io/badge/Kit-v2.0.0-blue)](https://github.com/fernandotenguan/antigravity-kit-personalizado)
+[![Agents](https://img.shields.io/badge/Agents-20-green)](https://github.com/fernandotenguan/antigravity-kit-personalizado)
+[![Skills](https://img.shields.io/badge/Skills-38+-orange)](https://github.com/fernandotenguan/antigravity-kit-personalizado)
+[![Tests](https://img.shields.io/badge/Tests-Automated-brightgreen)](https://github.com/fernandotenguan/antigravity-kit-personalizado)
 
 ---
 
 ## What's Included
 
-| Component     | Count | Description                                                        |
-| ------------- | ----- | ------------------------------------------------------------------ |
-| **Agents**    | 20    | Specialist AI personas (frontend, backend, security, PM, QA, etc.) |
-| **Skills**    | 40+   | Domainspecific knowledge modules (including Vercel & Claude)       |
-| **Workflows** | 11    | Slashcommand procedures for common tasks                           |
+| Component         | Count | Description                                                        |
+| ----------------- | ----- | ------------------------------------------------------------------ |
+| **Agents**        | 20    | Specialist AI personas (frontend, backend, security, game dev, etc.) |
+| **Skills**        | 38+   | Domain-specific knowledge modules with automated scripts           |
+| **Workflows**     | 13    | Slash-command procedures including the autonomous `/ade` pipeline  |
+| **Master Scripts**| 4     | `doctor.py`, `checklist.py`, `verify_all.py`, `sync_ide.py`        |
+| **Kit Tests**     | ✅     | Automated pytest suite — runs before every commit                  |
+| **Memory Layer**  | ✅     | Persistent lessons and gotchas across sessions                     |
+
+---
+
+## Features
+
+### 🤖 Intelligent Auto-Routing
+Describe what you need in plain English. The kit detects the domain and applies the right specialist automatically — no commands required.
+
+```
+You: "The login button is not working"       → @debugger
+You: "Make the UI look more modern"           → @frontend-specialist
+You: "Is the app safe to deploy?"             → @security-auditor
+You: "check kit" / "diagnose"                 → Health check (doctor.py)
+```
+
+### 🚀 Autonomous Development Pipeline (`/ade`)
+The most powerful mode. You describe a feature, the kit plans it, shows you the spec, and waits for approval before writing any code.
+
+```
+/ade add email notification system
+/ade create a sales dashboard with charts
+/ade implement Google OAuth login
+```
+
+**6-phase pipeline:** Discovery → Spec → ✋ Your Approval → Code → QA → Memory
+
+### 🏥 Kit Health Diagnostics
+```bash
+python .agent/scripts/doctor.py
+```
+Validates all 20 agents, 38+ skills, 13 workflows, and master scripts in seconds.
+
+### 🔒 Automated Pre-Commit Guard
+Tests run automatically before every `git commit`. If anything breaks, the commit is blocked until fixed.
+
+### 🧠 Persistent Memory Layer
+The kit remembers patterns and lessons learned across sessions, stored in `.agent/memory/`.
+
+### 🔄 Multi-IDE Sync
+Export the kit configuration to Claude Code, Cursor, and Codex CLI:
+```bash
+python .agent/scripts/sync_ide.py --target all
+```
 
 ---
 
 ## Installation
 
-This fork must be installed manually, since the official CLI defaults to the
-upstream repository.
+> **Requirements:** Python 3.9+ and Git
 
-### Option 1 NPX (recommended)
+### Option 1 — NPX (Recommended, fastest)
+
+Copy only the `.agent` folder into your existing project:
 
 ```bash
 npx giget@latest github:fernandotenguan/antigravity-kit-personalizado/.agent .agent --force
 ```
 
-> `giget` downloads and extracts only the `.agent` folder into your project.
+Then install the pre-commit hook so tests run automatically:
 
-### Option 2 Git clone
+```bash
+python .agent/scripts/install_hooks.py
+```
+
+### Option 2 — Git Clone
+
+Clone the full repository and copy `.agent` into your project:
 
 ```bash
 git clone https://github.com/fernandotenguan/antigravity-kit-personalizado.git
-# then copy the .agent directory into your project
+cd antigravity-kit-personalizado
+# Copy .agent/ into your own project:
+xcopy .agent "C:\path\to\your-project\.agent" /E /I    # Windows
+# cp -r .agent /path/to/your-project/                  # Linux/macOS
 ```
 
-### Option 3 Modify the global CLI
+### Verify Installation
 
-1. `npm install -g @vudovn/ag-kit`
-2. Open the installed binary (e.g. `.../node_modules/@vudovn/ag-kit/bin/index.js`)
-3. Change
-    ```js
-    const REPO = "github:vudovn/antigravity-kit";
-    ```
-    to
-    ```js
-    const REPO = "github:fernandotenguan/antigravity-kit-personalizado";
-    ```
-4. Use `ag-kit init` as usual.
+```bash
+python .agent/scripts/doctor.py
+```
 
-> **Note:** the `.agent` folder should **not** be added to your projects
-> `.gitignore` if you want AIpowered editors like Cursor or Windsurf to index
-> workflows. Instead, add it to `.git/info/exclude` so it remains local but
-> accessible.
+Expected output: `✅ All checks passed! Kit is healthy.`
 
 ---
 
-## Usage
+## Setup in VSCode (with GitHub Copilot or Gemini Code Assist)
 
-### Agents
+The kit works with any AI assistant in VSCode that can read workspace files. Here's how to get the best experience:
 
-Describe your need and the system:
-
-1. Analyzes your request
-2. Detects relevant domain(s)
-3. Selects the best agent(s)
-4. Reports which specialist(s) are at work
-
-```
-You: "Add JWT authentication"
-AI:  Applying @security-auditor + @backend-specialist...
-
-You: "Fix the dark mode button"
-AI:  Using @frontend-specialist...
-
-You: "Login returns 500 error"
-AI:  Using @debugger for systematic analysis...
-```
-
-**Benefits:**
-
-- Zero learning curve
-- Expertlevel responses
-- Transparent agent selection
-- Manual override via `@agent-name`
-
-### Workflows
-
-Invoke slash commands for structured procedures:
-
-| Command          | Purpose                             |
-| ---------------- | ----------------------------------- |
-| `/brainstorm`    | Explore options before implementing |
-| `/create`        | Scaffold features or applications   |
-| `/debug`         | Systematic debugging                |
-| `/deploy`        | Deploy the app                      |
-| `/enhance`       | Improve existing code               |
-| `/orchestrate`   | Coordinate multiple agents          |
-| `/plan`          | Break tasks into actionable steps   |
-| `/preview`       | Preview changes locally             |
-| `/status`        | Check project health                |
-| `/test`          | Generate and run tests              |
-| `/ui-ux-pro-max` | Produce UI/UX designs in 50 styles  |
-
-_Example:_
-
-```
-/brainstorm authentication system
-/create landing page with hero section
-/debug why login fails
-```
-
-### Skills
-
-Skills load automatically based on context; the AI reads each description and
-applies relevant knowledge.
-
-### CLI Tools
-
-| Command         | Description                   |
-| --------------- | ----------------------------- |
-| `ag-kit init`   | Install the `.agent` folder   |
-| `ag-kit update` | Refresh to the latest version |
-| `ag-kit status` | Display installation status   |
-
-**Options:**
+### Step 1 — Open the Project in VSCode
 
 ```bash
-ag-kit init --force        # overwrite existing .agent
-ag-kit init --path ./app   # install to a specific directory
-ag-kit init --quiet        # minimal output (useful for CI)
-ag-kit init --dry-run      # show actions without executing
+code .
+```
+
+Make sure your project has the `.agent/` folder at the root level.
+
+### Step 2 — Configure the AI to Read the Kit
+
+The kit's rules are stored in `.agent/rules/GEMINI.md`. For the AI to follow them automatically:
+
+**For GitHub Copilot (VSCode):**
+
+1. Open the Command Palette: `Ctrl+Shift+P` (Win) or `Cmd+Shift+P` (Mac)
+2. Search for: `GitHub Copilot: Open Chat`
+3. At the start of a session, type:
+   ```
+   Read and apply the rules in .agent/rules/GEMINI.md
+   ```
+
+**For Gemini Code Assist (VSCode):**
+
+The `GEMINI.md` rules are loaded automatically if the file is present in the workspace.
+
+**For Cursor:**
+
+Run the sync script to generate Cursor-specific rules:
+```bash
+python .agent/scripts/sync_ide.py --target cursor
+```
+This creates `.cursor/rules.md` with the full kit configuration.
+
+**For Claude Code:**
+```bash
+python .agent/scripts/sync_ide.py --target claude
+```
+This creates `.claude/CLAUDE.md`.
+
+### Step 3 — Install Recommended VSCode Extensions
+
+For the best development experience:
+
+| Extension | Purpose |
+|-----------|---------|
+| `esbenp.prettier-vscode` | Code formatting |
+| `dbaeumer.vscode-eslint` | Linting |
+| `ms-python.python` | Run `.agent/scripts/*.py` directly |
+| `ms-vscode.vscode-github-copilot` | AI coding assistant |
+| `github.copilot-chat` | Chat interface for agent commands |
+
+### Step 4 — Run the Kit Health Check from VSCode
+
+1. Open the integrated terminal: `` Ctrl+` ``
+2. Run:
+```bash
+python .agent/scripts/doctor.py
+```
+
+### Step 5 — Using Slash Commands in VSCode Chat
+
+In the Copilot chat panel, type any slash command:
+
+```
+/ade add a dark mode toggle to the app
+/debug why does the form not submit
+/build-saas subscription platform for freelancers
+```
+
+---
+
+## Slash Commands Reference
+
+| Command          | Purpose                                            |
+| ---------------- | -------------------------------------------------- |
+| `/ade`           | **Autonomous pipeline** — full feature end-to-end  |
+| `/build-saas`    | Plan a complete SaaS in 7 guided steps             |
+| `/plan`          | Create a detailed plan without writing code yet    |
+| `/create`        | Scaffold a new feature or application              |
+| `/brainstorm`    | Explore options with strategic questions           |
+| `/enhance`       | Improve an existing feature                        |
+| `/debug`         | Systematic bug investigation                       |
+| `/test`          | Generate and run tests                             |
+| `/deploy`        | Pre-flight checks + guided deployment              |
+| `/preview`       | Start local dev server                             |
+| `/status`        | Check project progress                             |
+| `/ui-ux-pro-max` | Premium UI/UX design in 50 styles                 |
+| `/orchestrate`   | Coordinate multiple agents for complex tasks        |
+
+---
+
+## Validation & Quality Scripts
+
+```bash
+# Kit health check (run first, always)
+python .agent/scripts/doctor.py
+
+# Run automated kit integrity tests
+python -m pytest .agent/tests/test_kit_integrity.py -v
+
+# Full project audit (security, lint, UX, SEO)
+python .agent/scripts/checklist.py .
+
+# Full verification before deployment
+python .agent/scripts/verify_all.py . --url http://localhost:3000
+
+# Sync kit to other IDEs
+python .agent/scripts/sync_ide.py --target all
+```
+
+---
+
+## How It Works
+
+```
+User request
+    │
+    ▼
+[GEMINI.md Rules]         ← P0: global rules, anti-hallucination, clean code
+    │
+    ▼
+[Intelligent Routing]     ← auto-detects domain from request
+    │
+    ▼
+[Agent Selected]          ← @frontend-specialist, @debugger, @security-auditor...
+    │
+    ▼
+[Skills Loaded]           ← domain knowledge specific to the task
+    │
+    ▼
+[Output + Verification]   ← zero-break protocol, tests run
+    │
+    ▼
+[Memory Updated]          ← lessons.md + gotchas.md
+```
+
+---
+
+## Project Structure
+
+```
+project-root/
+├── .agent/
+│   ├── agents/          # 20 specialist AI personas
+│   ├── skills/          # 38+ knowledge modules
+│   ├── workflows/       # 13 slash-command procedures
+│   ├── scripts/         # master validation scripts
+│   │   ├── doctor.py          # kit health check
+│   │   ├── checklist.py       # priority-based audit
+│   │   ├── verify_all.py      # full verification suite
+│   │   ├── sync_ide.py        # multi-IDE export
+│   │   └── install_hooks.py   # git hook installer
+│   ├── tests/
+│   │   └── test_kit_integrity.py  # automated pytest suite
+│   ├── memory/
+│   │   ├── lessons.md   # patterns that worked well
+│   │   └── gotchas.md   # common pitfalls to avoid
+│   └── rules/
+│       └── GEMINI.md    # master rules file (P0)
+└── README.md
 ```
 
 ---
 
 ## Support the Project
 
-> **Buy me a coffee**
+If this kit saves you time, consider supporting:
 
 <p align="center">
-  <!-- INSTRUCTIONS FOR PIX QR CODE: -->
-  <!-- 1. Generate a PIX QR code using sites like geradordepix.com or your banking app -->
-  <!-- 2. Save the image in the repo (e.g. pix-fernando.png) -->
-  <!-- 3. Upload it to GitHub or use a direct URL here -->
-  <img src="pix-fernando.png" alt="Apoie com PIX" width="200" />
+  <img src="pix-fernando.png" alt="PIX QR Code" width="180" />
 </p>
 
-**Ou copie a chave PIX:** fernando.tenguan@gmail.com
+**PIX key:** `fernando.tenguan@gmail.com`
 
 ---
 
 ## License
 
-MIT FernandoTenguan  
-(Forked from Vudovns original project)
+MIT — FernandoTenguan
+(Forked from Vudovn's original Antigravity Kit project)
 
 ---
 
-> _Thank you for exploring this custom Antigravity Kit build smarter, faster, and with confidence!_
+> *Build smarter. Ship faster. With confidence.*

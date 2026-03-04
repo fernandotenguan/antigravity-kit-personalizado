@@ -21,9 +21,11 @@ Antigravity Kit is a modular system consisting of:
 ├── ARCHITECTURE.md          # This file
 ├── agents/                  # 20 Specialist Agents
 ├── skills/                  # 36 Skills
-├── workflows/               # 11 Slash Commands
-├── rules/                   # Global Rules
-└── scripts/                 # Master Validation Scripts
+├── workflows/               # 13 Slash Commands
+├── rules/                   # Global Rules (GEMINI.md P0)
+├── scripts/                 # Master Validation Scripts
+├── tests/                   # Kit Integrity Tests
+└── memory/                  # Persistent Memory Layer
 ```
 
 ---
@@ -217,25 +219,42 @@ skill-name/
 
 ---
 
-## � Scripts (2)
+## 📂 Scripts (4 master + tests)
 
 Master validation scripts that orchestrate skill-level scripts.
 
 ### Master Scripts
 
-| Script          | Purpose                                 | When to Use              |
-| --------------- | --------------------------------------- | ------------------------ |
-| `checklist.py`  | Priority-based validation (Core checks) | Development, pre-commit  |
-| `verify_all.py` | Comprehensive verification (All checks) | Pre-deployment, releases |
+| Script                  | Purpose                                   | When to Use                    |
+| ----------------------- | ----------------------------------------- | ------------------------------ |
+| `doctor.py`             | Kit health check — agents, skills, refs   | Sempre, antes de qualquer work |
+| `checklist.py`          | Priority-based validation (Core checks)   | Development, pre-commit        |
+| `verify_all.py`         | Comprehensive verification (All checks)   | Pre-deployment, releases       |
+| `sync_ide.py`           | Multi-IDE sync (Claude, Codex, Cursor)    | Ao atualizar o kit             |
+
+### Kit Tests
+
+| File                      | Purpose                                         |
+| ------------------------- | ----------------------------------------------- |
+| `tests/test_kit_integrity.py` | Garante que agentes, skills e workflows são válidos |
 
 ### Usage
 
 ```bash
+# Quick health check
+python .agent/scripts/doctor.py
+
 # Quick validation during development
 python .agent/scripts/checklist.py .
 
 # Full verification before deployment
 python .agent/scripts/verify_all.py . --url http://localhost:3000
+
+# Kit integrity (after modifying .agent/)
+python -m pytest .agent/tests/ -v
+
+# Multi-IDE sync
+python .agent/scripts/sync_ide.py --target all
 ```
 
 ### What They Check
@@ -264,25 +283,30 @@ For details, see [scripts/README.md](scripts/README.md)
 
 ## 📊 Statistics
 
-| Metric              | Value                         |
-| ------------------- | ----------------------------- |
-| **Total Agents**    | 20                            |
-| **Total Skills**    | 36                            |
-| **Total Workflows** | 11                            |
-| **Total Scripts**   | 2 (master) + 18 (skill-level) |
-| **Coverage**        | ~90% web/mobile development   |
+| Metric              | Value                                       |
+| ------------------- | ------------------------------------------- |
+| **Total Agents**    | 20                                          |
+| **Total Skills**    | 36                                          |
+| **Total Workflows** | 13 (12 originais + /ade)                    |
+| **Master Scripts**  | 4 (doctor.py, checklist.py, verify_all.py, sync_ide.py) |
+| **Kit Tests**       | 1 (test_kit_integrity.py)                   |
+| **Skill Scripts**   | 12 (ux, seo, lighthouse, playwright, etc.)  |
+| **Memory Layer**    | .agent/memory/ (lessons.md + gotchas.md)    |
+| **Coverage**        | ~90% web/mobile development                 |
 
 ---
 
 ## 🔗 Quick Reference
 
-| Need     | Agent                 | Skills                                |
-| -------- | --------------------- | ------------------------------------- |
-| Web App  | `frontend-specialist` | react-best-practices, frontend-design |
-| API      | `backend-specialist`  | api-patterns, nodejs-best-practices   |
-| Mobile   | `mobile-developer`    | mobile-design                         |
-| Database | `database-architect`  | database-design, prisma-expert        |
-| Security | `security-auditor`    | vulnerability-scanner                 |
-| Testing  | `test-engineer`       | testing-patterns, webapp-testing      |
-| Debug    | `debugger`            | systematic-debugging                  |
-| Plan     | `project-planner`     | brainstorming, plan-writing           |
+| Need          | Agent                 | Skills / Scripts                               |
+| ------------- | --------------------- | ---------------------------------------------- |
+| Web App       | `frontend-specialist` | react-best-practices, frontend-design          |
+| API           | `backend-specialist`  | api-patterns, nodejs-best-practices            |
+| Mobile        | `mobile-developer`    | mobile-design                                  |
+| Database      | `database-architect`  | database-design, prisma-expert                 |
+| Security      | `security-auditor`    | vulnerability-scanner                          |
+| Testing       | `test-engineer`       | testing-patterns, webapp-testing               |
+| Debug         | `debugger`            | systematic-debugging                           |
+| Plan          | `project-planner`     | brainstorming, plan-writing                    |
+| **Kit Health**| *(script)*            | `python .agent/scripts/doctor.py`              |
+| **ADE**       | `orchestrator`        | `/ade` workflow — pipeline autônomo 6 fases    |

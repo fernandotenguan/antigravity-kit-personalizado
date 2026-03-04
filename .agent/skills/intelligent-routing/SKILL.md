@@ -47,7 +47,10 @@ graph TD
 | **Deployment**      | "deploy", "production", "CI/CD", "docker"  | `devops-engineer`                           | ✅ YES       |
 | **Security Review** | "security", "vulnerability", "exploit"     | `security-auditor` + `penetration-tester`   | ✅ YES       |
 | **Performance**     | "slow", "optimize", "performance", "speed" | `performance-optimizer`                     | ✅ YES       |
-| **Product Def**     | "requirements", "user story", "backlog", "MVP" | `product-owner`                             | ✅ YES       |
+| **Product Def**     | "requirements", "user story", "backlog", "MVP" | `product-owner`                         | ✅ YES       |
+| **Kit Health**      | "doctor", "diagnóstico", "checar kit", "kit integridade", "saúde do kit" | *(scripts diretos)* `python .agent/scripts/doctor.py` | ✅ YES |
+| **ADE Pipeline**    | "/ade", "pipeline autônomo", "autonomous pipeline", "req para código" | `orchestrator` via `/ade` workflow | ✅ YES |
+| **Memory Layer**    | "lições aprendidas", "lessons", "gotchas", "memory" | Consultar `.agent/memory/` antes de responder | ✅ YES |
 | **New Feature**     | "build", "create", "implement", "new app"  | `orchestrator` → multi-agent                | ⚠️ ASK FIRST |
 | **Complex Task**    | Multiple domains detected                  | `orchestrator` → multi-agent                | ⚠️ ASK FIRST |
 
@@ -100,19 +103,23 @@ function analyzeRequest(userMessage) {
 
 ### Single-Domain Tasks (Auto-invoke Single Agent)
 
-| Domain          | Patterns                                   | Agent                   |
-| --------------- | ------------------------------------------ | ----------------------- |
-| **Security**    | auth, login, jwt, password, hash, token    | `security-auditor`      |
-| **Frontend**    | component, react, vue, css, html, tailwind | `frontend-specialist`   |
-| **Backend**     | api, server, express, fastapi, node        | `backend-specialist`    |
-| **Mobile**      | react native, flutter, ios, android, expo  | `mobile-developer`      |
-| **Database**    | prisma, sql, mongodb, schema, migration    | `database-architect`    |
-| **Testing**     | test, jest, vitest, playwright, cypress    | `test-engineer`         |
-| **DevOps**      | docker, kubernetes, ci/cd, pm2, nginx      | `devops-engineer`       |
-| **Debug**       | error, bug, crash, not working, issue      | `debugger`              |
-| **Performance** | slow, lag, optimize, cache, performance    | `performance-optimizer` |
-| **SEO**         | seo, meta, analytics, sitemap, robots      | `seo-specialist`        |
-| **Game**        | unity, godot, phaser, game, multiplayer    | `game-developer`        |
+| Domain          | Patterns (EN + PT natural language)                                                  | Agent                   |
+| --------------- | ------------------------------------------------------------------------------------ | ----------------------- |
+| **Security**    | auth, login, jwt, password, hash, token, "tá seguro?", "pode ser hackeado?", "verificar segurança", "proteger dados" | `security-auditor` |
+| **Frontend**    | component, react, vue, css, html, tailwind, "deixa mais bonito", "muda o visual", "tá feio", "redesign", "interface moderna", "mudar cor", "dark mode", "modo escuro" | `frontend-specialist` |
+| **Backend**     | api, server, express, fastapi, node, "criar endpoint", "conectar com", "rota", "servidor", "API" | `backend-specialist` |
+| **Mobile**      | react native, flutter, ios, android, expo, "app mobile", "app para celular", "tela do celular" | `mobile-developer` |
+| **Database**    | prisma, sql, mongodb, schema, migration, "banco de dados", "tabela", "estrutura dos dados", "modelar dados" | `database-architect` |
+| **Testing**     | test, jest, vitest, playwright, cypress, "testar", "verificar qualidade", "tá funcionando?", "garantir que funciona", "rode os testes" | `test-engineer` |
+| **DevOps**      | docker, kubernetes, ci/cd, pm2, nginx, "colocar no ar", "publicar", "deploy", "servidor caiu" | `devops-engineer` |
+| **Debug**       | error, bug, crash, not working, issue, "não funciona", "tá quebrado", "dando erro", "travou", "tela branca", "não carrega", "bugado" | `debugger` |
+| **Performance** | slow, lag, optimize, cache, performance, "tá lento", "demora pra carregar", "site devagar", "pesado", "fica travando" | `performance-optimizer` |
+| **SEO**         | seo, meta, analytics, sitemap, robots, "aparecer no Google", "melhorar posição", "otimizar para buscadores", "mais visitas" | `seo-specialist` |
+| **Game**        | unity, godot, phaser, game, multiplayer, "criar jogo", "fazer um game", "jogo 2D" | `game-developer` |
+| **Kit Health**  | doctor, diagnóstico, "checar kit", "kit integridade", "saúde do kit", "tudo certo?", "verificar agente" | *(run doctor.py)* |
+| **ADE**         | /ade, "pipeline autônomo", "fazer tudo sozinho", "implementar de forma autônoma", "crie e entregue pronto" | `orchestrator`+`/ade` |
+| **Memory**      | "lições aprendidas", lessons, gotchas, "o que aprendemos", "evitar erro passado" | *.agent/memory/*  |
+
 
 ### Multi-Domain Tasks (Auto-invoke Orchestrator)
 

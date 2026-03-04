@@ -38,7 +38,9 @@ Agent activated → Check frontmatter "skills:" → Read SKILL.md (INDEX) → Re
 | **SIMPLE CODE**  | "fix", "add", "change" (single file)       | TIER 0 + TIER 1 (lite)         | Inline Edit                 |
 | **COMPLEX CODE** | "build", "create", "implement", "refactor" | TIER 0 + TIER 1 (full) + Agent | **{task-slug}.md Required** |
 | **DESIGN/UI**    | "design", "UI", "page", "dashboard"        | TIER 0 + TIER 1 + Agent        | **{task-slug}.md Required** |
-| **SLASH CMD**    | /create, /orchestrate, /debug, /build-saas | Command-specific flow          | Variable                    |
+| **SLASH CMD**    | /create, /orchestrate, /debug, /build-saas, /ade | Command-specific flow          | Variable                    |
+| **KIT HEALTH**   | "doctor", "diagnóstico", "kit integridade", "checar kit" | TIER 0 + Scripts     | `python .agent/scripts/doctor.py` |
+| **ADE PIPELINE** | /ade, "pipeline autônomo", "autonomous"    | TIER 0 + orchestrator + /ade   | ADE Workflow                |
 
 ---
 
@@ -104,6 +106,50 @@ When auto-applying an agent, inform the user:
 3. **Double Verification:** Run tests (`pytest`) + Visual check (Browser subagent) if it's UI.
 4. **Fallback:** If a change breaks the current state, revert immediately. Do not push broken code in progress.
 
+### 🧠 ANTI-HALLUCINATION & LOOP PROTECTION (MANDATORY)
+
+**Trigger: Activate on ANY repeated failure, circular reasoning, or unresolvable task.**
+
+#### Self-Check Trigger (run after EVERY failed attempt):
+
+> *"Am I doing the same thing again expecting a different result?"*
+> If YES → **STOP immediately and apply the escape protocol.**
+
+#### Loop Detection Rules
+
+| Signal | Mandatory Action |
+| ------ | ---------------- |
+| **Same tool called 3+ times** with same args and same error | STOP. Declare blocker. |
+| **Task not advancing** for 5+ consecutive tool calls | STOP. State what was tried. |
+| **Circular reasoning** (trying A → fails → tries B → fails → tries A again) | STOP. |
+| **File edit that fails 2+ times** with target content mismatch | Re-read the file first. |
+| **Subagent returns same error twice** | Switch approach entirely. |
+
+#### Escape Protocol (mandatory when loop is detected)
+
+```
+1. STOP all tool calls immediately.
+2. Summarize what was attempted (max 3 bullets).
+3. Declare: "⚠️ Detected loop/blocker. Cannot proceed with current approach."
+4. Offer the user 2-3 ALTERNATIVE approaches.
+5. Wait for user input before retrying ANYTHING.
+```
+
+#### Token Waste Prevention
+
+- **MAX 3 attempts** on the same exact action. After 3 → escalate to user.
+- **Never retry a subagent** with the same prompt if it failed the same way twice.
+- **Never call browser_subagent** more than 2 times in a row for the same visual check.
+- **If a file edit keeps failing** → view the file fresh, then do single targeted edit.
+
+#### User-Friendly Escape Phrases
+
+If the user says any of the following, **immediately stop all in-progress actions** and ask what to do:
+> "para", "cancela", "para tudo", "reset", "começa de novo", "tá em loop",
+> "não tá funcionando", "você tá travado", "cancela tudo"
+
+
+
 ### 👤 User Profile Awareness
 
 > The user is a **business-minded professional**, not a developer. Adapt communication accordingly.
@@ -167,6 +213,9 @@ When user's prompt is NOT in English:
 - Agents: `.agent/agents/` (Project)
 - Skills: `.agent/skills/` (Project)
 - Runtime Scripts: `.agent/skills/<skill>/scripts/`
+- Master Scripts: `.agent/scripts/` (doctor.py, checklist.py, verify_all.py, sync_ide.py)
+- Kit Tests: `.agent/tests/` (test_kit_integrity.py)
+- Memory Layer: `.agent/memory/` (lessons.md, gotchas.md)
 
 ### 🧠 Read → Understand → Apply
 
@@ -251,38 +300,46 @@ When user's prompt is NOT in English:
 
 **Trigger:** When the user says "verificação final", "final checks", "rode todos os testes", or similar phrases.
 
-| Task Stage       | Command                                            | Purpose                        |
-| ---------------- | -------------------------------------------------- | ------------------------------ |
-| **Manual Audit** | `python .agent/scripts/checklist.py .`             | Priority-based project audit   |
-| **Pre-Deploy**   | `python .agent/scripts/checklist.py . --url <URL>` | Full Suite + Performance + E2E |
+| Task Stage        | Command                                            | Purpose                        |
+| ----------------- | -------------------------------------------------- | ------------------------------ |
+| **Kit Health**    | `python .agent/scripts/doctor.py`                  | Diagnóstico de saúde do kit    |
+| **Kit Tests**     | `python -m pytest .agent/tests/ -v`                | Valida integridade do .agent/  |
+| **Manual Audit**  | `python .agent/scripts/checklist.py .`             | Priority-based project audit   |
+| **Pre-Deploy**    | `python .agent/scripts/checklist.py . --url <URL>` | Full Suite + Performance + E2E |
+| **IDE Sync**      | `python .agent/scripts/sync_ide.py --target all`   | Sincroniza kit para Claude/Cursor |
 
 **Priority Execution Order:**
 
-1. **Security** → 2. **Lint** → 3. **Schema** → 4. **Tests** → 5. **UX** → 6. **Seo** → 7. **Lighthouse/E2E**
+0. **Kit Health** → 1. **Security** → 2. **Lint** → 3. **Schema** → 4. **Tests** → 5. **UX** → 6. **Seo** → 7. **Lighthouse/E2E**
 
 **Rules:**
 
 - **Completion:** A task is NOT finished until `checklist.py` returns success.
 - **Reporting:** If it fails, fix the **Critical** blockers first (Security/Lint).
+- **Kit Integrity:** After qualquer modificação ao `.agent/`, rodar `python -m pytest .agent/tests/ -v` primeiro.
 
-**Available Scripts (12 total):**
+**Available Scripts (15 total):**
 
-| Script                     | Skill                 | When to Use         |
-| -------------------------- | --------------------- | ------------------- |
-| `security_scan.py`         | vulnerability-scanner | Always on deploy    |
-| `dependency_analyzer.py`   | vulnerability-scanner | Weekly / Deploy     |
-| `lint_runner.py`           | lint-and-validate     | Every code change   |
-| `test_runner.py`           | testing-patterns      | After logic change  |
-| `schema_validator.py`      | database-design       | After DB change     |
-| `ux_audit.py`              | frontend-design       | After UI change     |
-| `accessibility_checker.py` | frontend-design       | After UI change     |
-| `seo_checker.py`           | seo-fundamentals      | After page change   |
-| `bundle_analyzer.py`       | performance-profiling | Before deploy       |
-| `mobile_audit.py`          | mobile-design         | After mobile change |
-| `lighthouse_audit.py`      | performance-profiling | Before deploy       |
-| `playwright_runner.py`     | webapp-testing        | Before deploy       |
+| Script                     | Skill                 | When to Use                  |
+| -------------------------- | --------------------- | ---------------------------- |
+| `doctor.py`                | *(master)*            | Kit health check — sempre    |
+| `test_kit_integrity.py`    | *(master/tests)*      | Após modificar .agent/       |
+| `sync_ide.py`              | *(master)*            | Ao adicionar novo IDE/target |
+| `security_scan.py`         | vulnerability-scanner | Always on deploy             |
+| `dependency_analyzer.py`   | vulnerability-scanner | Weekly / Deploy              |
+| `lint_runner.py`           | lint-and-validate     | Every code change            |
+| `test_runner.py`           | testing-patterns      | After logic change           |
+| `schema_validator.py`      | database-design       | After DB change              |
+| `ux_audit.py`              | frontend-design       | After UI change              |
+| `accessibility_checker.py` | frontend-design       | After UI change              |
+| `seo_checker.py`           | seo-fundamentals      | After page change            |
+| `bundle_analyzer.py`       | performance-profiling | Before deploy                |
+| `mobile_audit.py`          | mobile-design         | After mobile change          |
+| `lighthouse_audit.py`      | performance-profiling | Before deploy                |
+| `playwright_runner.py`     | webapp-testing        | Before deploy                |
 
-> 🔴 **Agents & Skills can invoke ANY script** via `python .agent/skills/<skill>/scripts/<script>.py`
+> 🔴 **Agents & Skills can invoke ANY script** via `python .agent/skills/<skill>/scripts/<script>.py`  
+> 🔴 **Kit Master Scripts** via `python .agent/scripts/<script>.py`
 
 ### 🎭 Gemini Mode Mapping
 
@@ -332,9 +389,33 @@ When user's prompt is NOT in English:
 
 ### Key Scripts
 
+- **Kit Health**: `.agent/scripts/doctor.py` → diagnóstico completo do kit
+- **Kit Tests**: `python -m pytest .agent/tests/test_kit_integrity.py -v`
+- **IDE Sync**: `.agent/scripts/sync_ide.py --target [claude|cursor|codex|all]`
 - **Verify**: `.agent/scripts/verify_all.py`, `.agent/scripts/checklist.py`
 - **Scanners**: `security_scan.py`, `dependency_analyzer.py`
 - **Audits**: `ux_audit.py`, `mobile_audit.py`, `lighthouse_audit.py`, `seo_checker.py`
 - **Test**: `playwright_runner.py`, `test_runner.py`
+
+### Key Paths
+
+- **Agents**: `.agent/agents/` | **Skills**: `.agent/skills/` | **Workflows**: `.agent/workflows/`
+- **Scripts**: `.agent/scripts/` | **Tests**: `.agent/tests/` | **Memory**: `.agent/memory/`
+- **Rules**: `.agent/rules/GEMINI.md` (P0) | **Architecture**: `.agent/ARCHITECTURE.md`
+
+### Workflows (/slash commands)
+
+- `/brainstorm` `/create` `/debug` `/deploy` `/enhance` `/orchestrate`
+- `/plan` `/preview` `/status` `/test` `/ui-ux-pro-max`
+- `/ade` → **ADE Pipeline Autônomo** (req → spec → impl → qa → memory)
+- `/build-saas` → SaaS completo em 7 etapas
+
+### Memory Layer
+
+> Use `.agent/memory/` para preservar contexto entre sessões.
+
+- **lessons.md** → Padrões que funcionaram bem no projeto
+- **gotchas.md** → Erros comuns e como evitá-los
+- Consulte esses arquivos no início de tasks complexas para evitar repetir erros passados.
 
 ---

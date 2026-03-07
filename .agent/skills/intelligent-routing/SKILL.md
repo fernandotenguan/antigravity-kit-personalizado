@@ -51,6 +51,8 @@ graph TD
 | **Kit Health**      | "doctor", "diagnóstico", "checar kit" / "saúde", "integridade", "tá tudo certo" | *(scripts)* `doctor.py`                      | ✅ YES       |
 | **ADE Pipeline**    | "/ade", "pipeline autônomo" / "fazer tudo", "implementar autônomo" | `orchestrator` via `/ade`                   | ✅ YES       |
 | **Memory Layer**    | "lessons", "gotchas", "memory" / "lições", "aprendemos", "evitar erro" | Consultar `.agent/memory/`                  | ✅ YES       |
+| **Premium Design** | "premium design", "immersive", "awwwards", "gsap", "three.js" / "site premiado", "design de luxo", "animações premium", "interface imersiva", "5 pilares", "experiência imersiva", "design premium" | `frontend-specialist` + `premium-design-orchestrator` | ✅ YES       |
+| **Brand Extraction** | "extract identity", "clone design", "analyze reference" / "extrair identidade", "clonar design", "analisar referência", "extrair paleta", "copiar essência" | `brand-identity-extractor` | ✅ YES       |
 
 ### 3. Automatic Routing Protocol
 
@@ -117,6 +119,8 @@ function analyzeRequest(userMessage) {
 | **Kit Health**  | doctor, diagnóstico, "checar kit", "kit integridade", "saúde do kit", "tudo certo?", "verificar agente" | *(run doctor.py)* |
 | **ADE**         | /ade, "pipeline autônomo", "fazer tudo sozinho", "implementar de forma autônoma", "crie e entregue pronto" | `orchestrator`+`/ade` |
 | **Memory**      | "lições aprendidas", lessons, gotchas, "o que aprendemos", "evitar erro passado" | *.agent/memory/*  |
+| **Premium Design** | gsap, three.js, swup, awwwards, scroll suave, "design premium", "site premiado", "interface imersiva", "animações premium", "5 pilares", "experiência imersiva", "landing page premium", "paleta premium" | `frontend-specialist` + premium skills |
+| **Brand Extraction** | "extrair identidade", "clonar design", "analisar referência", "extrair paleta", "copiar essência", "extract brand", "analyze design" | `brand-identity-extractor` |
 
 
 ### Multi-Domain Tasks (Auto-invoke Orchestrator)

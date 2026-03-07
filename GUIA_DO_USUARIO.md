@@ -334,41 +334,111 @@ O agente vai rodar `doctor.py` e confirmar que todos os 20 agentes, 38 skills e 
 
 ---
 
-## 🧠 Palavras e Frases que Ativam os Especialistas
+## 🧠 Guia Completo: Agentes, Skills e Palavras-Chave
 
-Você pode usar qualquer uma dessas frases naturais — o agente identifica automaticamente:
+> Use qualquer termo abaixo — em **Português** ou **Inglês** — e o agente correto será ativado automaticamente.
 
-### 🎨 Para Design e Visual
-> "muda o visual", "deixa mais bonito", "redesign", "tá feio", "quero mais moderno",
-> "interface premium", "mudar as cores", "esquema de cores", "dark mode", "modo escuro"
+### 🤖 Agentes Especialistas (20)
 
-### 🔒 Para Segurança
-> "tá seguro?", "pode ser hackeado?", "verificar segurança", "auditoria de segurança",
-> "proteger os dados", "criptografar senha", "checar vulnerabilidades"
+| Agente | O que faz | 🇧🇷 Termos PT-BR | 🇺🇸 Termos EN |
+|--------|-----------|-------------------|---------------|
+| **🎨 frontend-specialist** | Design, visual, layout, componentes | "muda o visual", "deixa mais bonito", "redesign", "tá feio", "interface moderna", "mudar as cores", "dark mode", "modo escuro", "esquema de cores" | "change design", "UI component", "button", "card", "layout", "style", "CSS", "responsive" |
+| **⚙️ backend-specialist** | Servidor, API, rotas, lógica | "criar rota", "conectar o front", "servidor", "rota", "API", "endpoint" | "create endpoint", "server", "route", "API", "backend", "middleware" |
+| **💾 database-architect** | Banco de dados, tabelas, SQL | "banco de dados", "tabela", "estrutura dos dados", "modelar dados", "schema do banco" | "database", "schema", "table", "query", "migration", "SQL", "prisma" |
+| **📱 mobile-developer** | Apps mobile (React Native, Flutter) | "app mobile", "app para celular", "tela do celular", "app nativo" | "react native", "flutter", "ios", "android", "expo", "mobile app" |
+| **🔍 debugger** | Conserta erros e bugs | "não funciona", "tá quebrado", "dando erro", "travou", "tela branca", "não carrega", "bugado", "caiu" | "error", "bug", "broken", "crash", "not working", "issue", "fix" |
+| **🛡️ security-auditor** | Segurança, proteção, vulnerabilidades | "tá seguro?", "pode ser hackeado?", "verificar segurança", "proteger dados", "criptografar", "auditoria de segurança", "checar vulnerabilidades" | "security", "vulnerability", "auth", "login", "password", "encrypt", "audit" |
+| **🧪 test-engineer** | Testes, qualidade, validação | "testar", "tá funcionando?", "verificar qualidade", "rode os testes", "garantir que funciona", "checklist de qualidade" | "test", "coverage", "unit test", "integration", "validate", "jest", "playwright" |
+| **🚀 devops-engineer** | Deploy, CI/CD, Docker, servidor | "colocar no ar", "publicar", "deploy", "servidor caiu", "mandar pra produção" | "deploy", "CI/CD", "docker", "kubernetes", "hosting", "server" |
+| **⚡ performance-optimizer** | Velocidade, otimização, Core Web Vitals | "tá lento", "demora pra carregar", "pesado", "melhorar velocidade", "site devagar", "fica travando" | "slow", "optimize", "speed", "performance", "cache", "lazy load" |
+| **🌐 seo-specialist** | SEO, Google, visibilidade | "aparecer no Google", "melhorar posição", "SEO", "mais visitas orgânicas", "não aparece na busca" | "SEO", "meta tags", "sitemap", "ranking", "search engine", "analytics" |
+| **🏗️ orchestrator** | Coordena múltiplos agentes | "tarefa complexa", "fazer tudo", "orquestrar", "coordenar" | "orchestrate", "multi-agent", "complex task", "coordinate" |
+| **📋 project-planner** | Planejamento, discovery, roadmap | "planejar", "requisitos", "ideia", "funcionalidades", "MVP" | "plan", "requirements", "discovery", "roadmap", "MVP" |
+| **🎮 game-developer** | Jogos 2D, 3D, multiplayer | "criar um jogo", "fazer um game", "jogo 2D", "mecânica de jogo" | "game", "unity", "godot", "phaser", "multiplayer" |
+| **📄 documentation-writer** | Documentação, README, guias | "documentar", "README", "escrever os docs", "criar documentação" | "documentation", "README", "API docs", "write docs" |
+| **🔬 explorer-agent** | Analisar codebase, explorar código | "analisar código", "visão geral", "listar arquivos", "entender o projeto" | "analyze", "list files", "overview", "explore codebase" |
+| **👔 product-owner** | Estratégia, backlog, user stories | "requisitos", "ideia", "funcionalidades", "quem vai usar" | "requirements", "MVP", "user stories", "backlog" |
+| **🔧 code-archaeologist** | Código legado, refatoração | "refatorar", "código antigo", "limpar código", "organizar" | "refactor", "legacy code", "clean up", "reorganize" |
+| **🧪 qa-automation-engineer** | Testes E2E, pipelines de teste | "testar o app inteiro", "simular usuário", "fluxo completo" | "E2E test", "end-to-end", "playwright", "test pipeline" |
+| **🕵️ penetration-tester** | Testes de intrusão, red team | "simular ataque", "pentest", "teste de invasão" | "penetration test", "red team", "attack simulation" |
+| **📊 product-manager** | Requisitos, histórias de usuário | "histórias de usuário", "o que o app precisa ter" | "user stories", "product requirements" |
 
-### 🐛 Para Bugs e Erros
-> "não funciona", "tá quebrado", "dando erro", "travou", "tela branca",
-> "não carrega", "bugado", "o sistema caiu"
+---
 
-### ⚡ Para Performance
-> "tá lento", "demora pra carregar", "pesado", "melhorar velocidade",
-> "site devagar", "otimizar", "fica travando"
+### 💎 Skills Premium Design (Novo!)
 
-### 🌐 Para SEO e Google
-> "aparecer no Google", "melhorar posição no Google", "SEO",
-> "mais visitas orgânicas", "não aparece na busca", "otimizar para buscadores"
+| Skill | O que faz | 🇧🇷 Termos PT-BR | 🇺🇸 Termos EN |
+|-------|-----------|-------------------|---------------|
+| **🎨 premium-design-orchestrator** | Paletas, tipografia, design de alto nível | "design premium", "site premiado", "interface imersiva", "landing page premium", "experiência imersiva", "paleta premium", "tipografia premium" | "premium design", "awwwards", "immersive experience", "premium palette", "luxury design" |
+| **🔍 brand-identity-extractor** | Extrai identidade visual de sites | "extrair identidade", "clonar design", "analisar referência", "extrair paleta", "copiar essência", "capturar o visual desse site" | "extract identity", "clone design", "analyze reference", "extract palette", "copy essence" |
+| **⚡ premium-tech-stack** | Animações GSAP, scroll suave, 3D | "animações premium", "GSAP", "Three.js", "scroll suave", "transições de página", "5 pilares", "experiência imersiva" | "GSAP", "ScrollTrigger", "Three.js", "smooth scroll", "page transitions", "premium animations" |
 
-### 🧪 Para Testes
-> "testar", "tá funcionando?", "verificar qualidade", "rode os testes",
-> "garantir que funciona", "checklist de qualidade", "antes de publicar"
+---
 
-### 🏥 Para Diagnóstico do Kit
-> "checar kit", "diagnóstico do kit", "tudo certo?", "kit integridade",
-> "saúde do kit", "doctor", "verificar o agente"
+### 🧠 Skills de Estratégia e IA
 
-### 🤖 Para Pipeline Autônomo
-> "/ade", "implementar de forma autônoma", "fazer tudo sozinho",
-> "pipeline completo", "crie do zero e entregue pronto"
+| Skill | O que faz | 🇧🇷 Termos PT-BR | 🇺🇸 Termos EN |
+|-------|-----------|-------------------|---------------|
+| **🧠 00-andruia-consultant** | Consultoria de soluções IA | "consultor de IA", "roadmap de IA", "qual IA usar" | "AI consultant", "AI roadmap", "which AI to use" |
+| **📊 20-andruia-niche-intelligence** | Análise de nicho e mercado | "análise do nicho", "mercado", "concorrência" | "niche analysis", "market research", "competitor" |
+| **💾 agent-memory-mcp** | Memória persistente do agente | "lembrar contexto", "memória do agente", "lições" | "agent memory", "context", "lessons learned" |
+| **🧪 agent-evaluation** | Avaliação de qualidade da IA | "avaliar a IA", "qualidade da resposta" | "evaluate AI", "agent quality", "performance" |
+| **🤖 ai-engineer** | Construção de apps com LLM/IA | "construir com IA", "agente inteligente", "LLM" | "build with AI", "LLM app", "intelligent agent" |
+| **📈 startup-analyst** | Análise de métricas de startup | "CAC", "LTV", "burn rate", "métricas de negócio" | "startup metrics", "CAC", "LTV", "burn rate" |
+| **🚀 micro-saas-launcher** | Lançamento de micro-SaaS | "lançar SaaS", "MVP rápido", "indie hacker" | "launch SaaS", "quick MVP", "indie hacker" |
+
+---
+
+### 🔧 Skills Técnicas Essenciais
+
+| Skill | O que faz | 🇧🇷 Termos PT-BR | 🇺🇸 Termos EN |
+|-------|-----------|-------------------|---------------|
+| **🧹 clean-code** | Código limpo, padrões de qualidade | "código limpo", "refatorar", "melhorar código" | "clean code", "refactor", "code quality" |
+| **🧪 testing-patterns** | Estratégias de teste | "testar", "verificar qualidade", "rode os testes" | "testing", "unit test", "coverage", "TDD" |
+| **🔐 vulnerability-scanner** | Scanner de vulnerabilidades | "checar vulnerabilidades", "seguro?", "auditoria" | "scan vulnerabilities", "security audit", "OWASP" |
+| **📋 plan-writing** | Planejamento de tarefas detalhado | "planejar feature", "quebrar em tarefas" | "plan feature", "task breakdown", "implementation plan" |
+| **🏗️ app-builder** | Construção de apps do zero | "criar do zero", "construir app", "novo projeto" | "build from scratch", "create app", "new project" |
+| **💾 database-design** | Design de banco de dados | "modelar o banco", "estrutura de dados", "schema" | "database design", "data model", "schema", "SQL vs NoSQL" |
+| **🔌 api-patterns** | Design de APIs | "criar API", "conectar front com back", "endpoints" | "API design", "REST", "GraphQL", "endpoints" |
+| **🌐 seo-fundamentals** | SEO técnico e on-page | "aparecer no Google", "SEO", "meta tags" | "SEO", "search ranking", "meta tags", "sitemap" |
+| **⚡ performance-profiling** | Core Web Vitals, otimização | "tá lento", "melhorar velocidade", "otimizar" | "performance", "Core Web Vitals", "optimize", "speed" |
+| **📱 mobile-design** | Design mobile-first | "design pro celular", "interface mobile" | "mobile design", "touch interaction", "app design" |
+| **🎨 frontend-design** | Design thinking para web | "melhorar o visual", "cores", "tipografia" | "visual design", "colors", "typography", "layout" |
+| **🚢 deployment-procedures** | Deploy seguro | "colocar no ar", "publicar", "fazer deploy" | "deploy", "go live", "release", "production" |
+| **🌍 i18n-localization** | Multi-idioma, traduções | "traduzir o app", "multi-idioma", "internacionalizar" | "translate", "multi-language", "localization", "i18n" |
+
+---
+
+### ⌨️ Comandos Slash (Atalhos Rápidos)
+
+| Comando | 🇧🇷 Quando usar | 🇺🇸 When to use |
+|---------|-----------------|-----------------|
+| `/brainstorm` | Explorar uma ideia, fazer perguntas | Explore an idea, ask strategic questions |
+| `/build-saas` | Planejar um SaaS completo em 7 etapas | Plan a complete SaaS in 7 steps |
+| `/create` | Construir algo novo do zero | Build something new from scratch |
+| `/plan` | Planejar uma feature sem codar | Plan a feature without coding |
+| `/ade` | Pipeline autônomo (faz tudo sozinho) | Autonomous pipeline (does everything) |
+| `/enhance` | Melhorar algo existente | Improve something existing |
+| `/debug` | Investigar e corrigir um bug | Investigate and fix a bug |
+| `/test` | Criar e rodar testes | Create and run tests |
+| `/deploy` | Publicar em produção | Deploy to production |
+| `/preview` | Ligar servidor local | Start local dev server |
+| `/status` | Ver progresso do projeto | View project progress |
+| `/ui-ux-pro-max` | Design premium com 50 estilos | Premium design with 50 styles |
+| `/new-project` | Criar nova pasta de projeto | Create new project folder |
+| `/orchestrate` | Coordenar tarefa multi-agente | Coordinate multi-agent task |
+
+---
+
+### 🏥 Comandos de Saúde do Kit
+
+| Ação | 🇧🇷 Como chamar | 🇺🇸 How to call |
+|------|-----------------|-----------------|
+| Diagnóstico | "checar kit", "diagnóstico", "tudo certo?", "saúde do kit" | "check kit", "doctor", "kit health", "diagnostics" |
+| Testes do kit | "rode os testes do kit", "verificar integridade" | "run kit tests", "verify integrity" |
+| Verificação final | "verificação final", "rode todos os testes" | "final check", "run all tests" |
+| Ver memória | "lições aprendidas", "o que aprendemos" | "lessons learned", "gotchas", "memory" |
+
 
 ---
 

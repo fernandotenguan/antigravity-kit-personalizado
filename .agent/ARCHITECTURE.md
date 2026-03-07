@@ -59,7 +59,7 @@ Specialist AI personas for different domains.
 
 ---
 
-## 🧩 Skills (36)
+## 🧩 Skills (39)
 
 Modular knowledge domains that agents can load on-demand. based on task context.
 
@@ -72,6 +72,14 @@ Modular knowledge domains that agents can load on-demand. based on task context.
 | `tailwind-patterns`     | Tailwind CSS v4 utilities                                             |
 | `frontend-design`       | UI/UX patterns, design systems                                        |
 | `ui-ux-pro-max`         | 50 styles, 21 palettes, 50 fonts                                      |
+
+### Premium Design
+
+| Skill                         | Description                                                                |
+| ----------------------------- | -------------------------------------------------------------------------- |
+| `premium-design-orchestrator` | Master orchestrator com 14 nichos, 77 paletas e divulgação progressiva     |
+| `brand-identity-extractor`    | Extração automática de identidade visual de referências (3 etapas)         |
+| `premium-tech-stack`          | 5 Pilares Premium: GSAP, ScrollSmoother, Swup, Motion, Three.js           |
 
 ### Backend & API
 
@@ -286,7 +294,7 @@ For details, see [scripts/README.md](scripts/README.md)
 | Metric              | Value                                       |
 | ------------------- | ------------------------------------------- |
 | **Total Agents**    | 20                                          |
-| **Total Skills**    | 36                                          |
+| **Total Skills**    | 39                                          |
 | **Total Workflows** | 13 (12 originais + /ade)                    |
 | **Master Scripts**  | 4 (doctor.py, checklist.py, verify_all.py, sync_ide.py) |
 | **Kit Tests**       | 1 (test_kit_integrity.py)                   |

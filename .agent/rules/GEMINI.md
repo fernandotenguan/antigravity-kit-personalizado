@@ -95,6 +95,30 @@ When auto-applying an agent, inform the user:
 
 ---
 
+## ⚡ EFICIÊNCIA OPERACIONAL & ECONOMIA (MODOS SELETIVOS)
+
+### 1. Localização Restrita de Integridade do Kit
+- **Regra:** O script `python -m pytest .agent/tests/test_kit_integrity.py` deve ser executado **EXCLUSIVAMENTE** dentro do projeto `antigravity-kit-personalizado`.
+- **Comportamento:** Em qualquer outro repositório que utilize este kit, ignore os testes de metadados do kit para economizar processamento. Se solicitado em outros projetos, informe ao usuário que isso é restrito ao projeto oficial de manutenção.
+
+### 2. Validação Seletiva (Selective Validation Mode) - PADRÃO
+- **Regra:** Não valide o projeto inteiro em cada iteração. Foque **APENAS** no que foi alterado.
+- **Execução:** Ao rodar `checklist.py`, passe os caminhos específicos dos arquivos ou pastas modificados (ex: `python .agent/scripts/checklist.py src/components/Login.tsx`).
+- **Escopo:** Se a mudança for lógica profunda, valide o módulo afetado. Se for apenas estilo, valide apenas o arquivo CSS/Componente.
+
+### 3. Fast-Track CI (Deploy Only)
+- **Desenvolvimento:** Use apenas `checklist.py` (Security + Lint + Schema) de forma silenciosa e rápida.
+- **Deploy:** Reserve o `verify_all.py` (Lighthouse + Playwright E2E + Bundle Analysis) **EXCLUSIVAMENTE** para o comando `/deploy`. Nunca execute testes pesados durante o fluxo de criação/edição comum, a menos que haja um bug visual crítico.
+
+### 4. Ambiente de Preview Inteligente
+- **Regra:** O `browser_subagent` para verificação visual só deve ser invocado se houver alterações detectadas em:
+    - Arquivos CSS/Tailwind (`.css`, `.scss`)
+    - Estrutura HTML/JSX (`.html`, `.tsx`, `.jsx`, `.vue`)
+    - Configurações de layout ou bibliotecas de animação (GSAP, Framer Motion).
+- **Lógica:** Se a alteração for apenas em uma função de Utility ou API (Backend/Logic), **NÃO** abra o navegador.
+
+---
+
 ## TIER 0: UNIVERSAL RULES (Always Active)
 
 ### 🛡️ ZERO-BREAK DEPLOYMENT PROTOCOL (MANDATORY)

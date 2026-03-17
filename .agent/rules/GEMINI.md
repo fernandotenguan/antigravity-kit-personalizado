@@ -219,6 +219,7 @@ If the user says any of the following, **immediately stop all in-progress action
 **ALL code MUST follow `@[skills/clean-code]` rules. No exceptions.**
 
 - **Code**: Concise, direct, no over-engineering. Self-documenting.
+- **Cleaning**: Mandatory. Run `python .agent/scripts/auto_fixer.py <paths_to_changed_files>` before finalizing any task to ensure auto-formatting and lint fixing. Use specific paths instead of `.` to save resources.
 - **Testing**: Mandatory. Pyramid (Unit > Int > E2E) + AAA Pattern.
 - **Performance**: Measure first. Adhere to 2025 standards (Core Web Vitals).
 - **Infra/Safety**: 5-Phase Deployment. Verify secrets security.
@@ -330,6 +331,7 @@ If the user says any of the following, **immediately stop all in-progress action
 | Task Stage        | Command                                            | Purpose                        |
 | ----------------- | -------------------------------------------------- | ------------------------------ |
 | **Kit Health**    | `python .agent/scripts/doctor.py`                  | Diagnóstico de saúde do kit    |
+| **Cleaning**      | `python .agent/scripts/auto_fixer.py .`            | Auto-fix lint & formatting     |
 | **Kit Tests**     | `python -m pytest .agent/tests/ -v`                | Valida integridade do .agent/  |
 | **Manual Audit**  | `python .agent/scripts/checklist.py .`             | Priority-based project audit   |
 | **Pre-Deploy**    | `python .agent/scripts/checklist.py . --url <URL>` | Full Suite + Performance + E2E |
@@ -337,7 +339,7 @@ If the user says any of the following, **immediately stop all in-progress action
 
 **Priority Execution Order:**
 
-0. **Kit Health** → 1. **Security** → 2. **Lint** → 3. **Schema** → 4. **Tests** → 5. **UX** → 6. **Seo** → 7. **Lighthouse/E2E**
+0. **Kit Health** → 1. **Cleaning** → 2. **Security** → 3. **Lint** → 4. **Schema** → 5. **Tests** → 6. **UX** → 7. **Seo** → 8. **Lighthouse/E2E**
 
 **Rules:**
 

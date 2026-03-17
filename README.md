@@ -5,19 +5,20 @@
 
 [![Kit Version](https://img.shields.io/badge/Kit-v2.0.0-blue)](https://github.com/fernandotenguan/antigravity-kit-personalizado)
 [![Agents](https://img.shields.io/badge/Agents-20-green)](https://github.com/fernandotenguan/antigravity-kit-personalizado)
-[![Skills](https://img.shields.io/badge/Skills-47-orange)](https://github.com/fernandotenguan/antigravity-kit-personalizado)
+[![Skills](https://img.shields.io/badge/Skills-50-orange)](https://github.com/fernandotenguan/antigravity-kit-personalizado)
+[![Workflows](https://img.shields.io/badge/Workflows-15-red)](https://github.com/fernandotenguan/antigravity-kit-personalizado)
 [![Tests](https://img.shields.io/badge/Tests-Automated-brightgreen)](https://github.com/fernandotenguan/antigravity-kit-personalizado)
 
 ---
 
 ## What's Included
 
-| Component         | Count | Description                                                        |
+| Components        | Count | Description                                                        |
 | ----------------- | ----- | ------------------------------------------------------------------ |
 | **Agents**        | 20    | Specialist AI personas (frontend, backend, security, game dev, etc.) |
-| **Skills**        | 47    | Domain-specific knowledge modules with automated scripts           |
-| **Workflows**     | 13    | Slash-command procedures including the autonomous `/ade` pipeline  |
-| **Master Scripts**| 4     | `doctor.py`, `checklist.py`, `verify_all.py`, `sync_ide.py`        |
+| **Skills**        | 50    | Domain-specific knowledge modules with automated scripts           |
+| **Workflows**     | 15    | Slash-command procedures including the autonomous `/ade` pipeline  |
+| **Master Scripts**| 5     | `doctor.py`, `checklist.py`, `verify_all.py`, `sync_ide.py`, `auto_fixer.py` |
 | **Kit Tests**     | ✅     | Automated pytest suite — runs before every commit                  |
 | **Memory Layer**  | ✅     | Persistent lessons and gotchas across sessions                     |
 
@@ -214,6 +215,7 @@ In the Copilot chat panel, type any slash command:
 | `/preview`       | Start local dev server                             |
 | `/status`        | Check project progress                             |
 | `/ui-ux-pro-max` | Premium UI/UX design in 50 styles                 |
+| `/clean`         | **Auto-fix & optimize** code (selective path support) |
 | `/orchestrate`   | Coordinate multiple agents for complex tasks        |
 
 ---
@@ -224,8 +226,8 @@ In the Copilot chat panel, type any slash command:
 # Kit health check (run first, always)
 python .agent/scripts/doctor.py
 
-# Run automated kit integrity tests
-python -m pytest .agent/tests/test_kit_integrity.py -v
+# Auto-fix & format code (selective paths supported)
+python .agent/scripts/auto_fixer.py src/   # Cleaner for a specific folder
 
 # Full project audit (security, lint, UX, SEO)
 python .agent/scripts/checklist.py .

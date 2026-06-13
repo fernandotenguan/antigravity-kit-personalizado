@@ -15,6 +15,14 @@ import os
 from pathlib import Path
 from datetime import datetime
 
+# Configuração de encoding para evitar erros em terminais Windows (cp1252)
+import sys
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except AttributeError:
+        pass
+
 # ANSI colors
 class Colors:
     CYAN = '\033[96m'

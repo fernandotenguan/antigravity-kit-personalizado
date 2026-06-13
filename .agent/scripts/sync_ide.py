@@ -9,6 +9,7 @@ Usage:
   python .agent/scripts/sync_ide.py --target all
   python .agent/scripts/sync_ide.py --dry-run --target all
 """
+
 import argparse
 import sys
 from pathlib import Path
@@ -153,11 +154,302 @@ This file configures the Antigravity Kit specialist agents for Codex CLI.
     write_output(output_path, content, dry_run)
 
 
+# ── target: copilot ───────────────────────────────────────────────────────────
+def generate_copilot_config(dry_run: bool) -> None:
+    """Generate .github/copilot-instructions.md and modular .github/instructions/ files."""
+    print(f"\n{CYAN}{BOLD}→ Syncing: GitHub Copilot (VSCode){RESET}")
+
+    agent_summary = build_agent_summary()
+
+    # ── 1. Core instructions (always loaded, kept compact) ────────────────
+    core_content = f"""# Antigravity Kit — GitHub Copilot Instructions
+> Auto-generated from .agent/rules/GEMINI.md via sync_ide.py. Do not edit manually.
+
+## Agent System
+
+This workspace uses the **Antigravity Kit**, a multi-agent AI framework. Before writing code, identify the correct specialist agent for the domain and apply its principles.
+
+{agent_summary}
+
+### Activation
+
+Mention an agent by name to activate it: `@frontend-specialist`, `@backend-specialist`, etc.
+When auto-selecting, announce: `🤖 Applying knowledge of @[agent-name]...`
+
+Agent files are located in `.agent/agents/`. Read the agent's `.md` file before implementing.
+
+## Core Principles
+
+### Zero-Break Protocol
+- Never break existing code. All changes must be additive or safely encapsulated.
+- Verify the app compiles, runs, and renders correctly before reporting success.
+- If a change breaks the current state, revert immediately.
+
+### Anti-Hallucination
+- If the same approach fails 3 times, STOP and present alternatives to the user.
+- Never guess. If unsure, ask. If 1% is unclear, clarify before implementing.
+- After every failed attempt, ask: "Am I repeating the same thing expecting a different result?"
+
+### User Profile
+- The user is a **business-minded professional**, not a developer.
+- Explain decisions in plain language. Make technical decisions autonomously.
+- Respond in the user's language (PT-BR or EN). Keep technical terms in English.
+
+### Clean Code (Mandatory)
+- Functions do ONE thing. Max 20 lines. Max 3 arguments.
+- Names reveal intent: `elapsed_time_in_days` not `d`.
+- No dead code, no unused imports, no commented-out blocks.
+- Type hints mandatory (Python). Strict mode, no `any` (TypeScript).
+- Secrets in `.env` only, never hardcoded.
+
+### Before Modifying Any File
+1. Identify dependent files (imports, references, shared types).
+2. Update ALL affected files together.
+3. Verify no broken imports after changes.
+
+## Kit Structure
+
+| Path | Purpose |
+|------|---------|
+| `.agent/agents/` | Specialist AI personas (20 agents) |
+| `.agent/skills/` | Domain knowledge modules |
+| `.agent/scripts/` | Validation scripts (doctor.py, checklist.py) |
+| `.agent/memory/` | Persistent lessons and gotchas |
+| `.agent/rules/GEMINI.md` | Full ruleset (read for deep context) |
+
+## Modular Instructions
+
+Domain-specific rules are in `.github/instructions/`:
+- `code-quality.instructions.md` — naming, functions, error handling, structure
+- `frontend.instructions.md` — UI/UX, React, CSS, accessibility
+- `backend.instructions.md` — API, database, server patterns
+- `security.instructions.md` — security checklist, secrets, input validation
+"""
+    write_output(
+        REPO_ROOT / ".github" / "copilot-instructions.md", core_content, dry_run
+    )
+
+    # ── 2. Code Quality (modular) ─────────────────────────────────────────
+    code_quality = """---
+applyTo: "**"
+---
+
+# Code Quality Standards — Antigravity Kit
+> Auto-generated via sync_ide.py. Do not edit manually.
+
+## Functions & Methods
+
+- Functions MUST do ONE thing only. If you need "and" to describe it, split into two.
+- Maximum 20 lines per function. Above that, extract sub-functions.
+- Maximum 3 arguments per function. Above that, group into object/dataclass/Pydantic model.
+- Functions MUST NOT have hidden side effects (mutating global state, modifying mutable arguments silently).
+- Function names MUST be descriptive verbs: `create_subscription()`, `validate_input()`. Never `process()`, `handle()`, `do()`.
+
+## Naming & Readability
+
+- Names MUST reveal intent: `elapsed_time_in_days` not `d`, `is_active_subscription` not `flag`.
+- Classes/models with noun names: `Subscription`, `UserProfile`. Avoid `Manager`, `Helper`, `Data`, `Info`.
+- No ambiguous abbreviations: `usr`, `mgr`, `tmp`. Write in full.
+- Consistent naming: if you used `get_user` in one module, don't use `fetch_user` in another without reason.
+
+## Error Handling
+
+- Use exceptions instead of return codes.
+- NEVER return None/null to indicate error. Raise exception with clear message.
+- Try/except MUST be specific: catch `ValueError`, `HTTPException`. NEVER generic `except Exception` (except in top-level catch-all).
+- Domain errors MUST use custom exceptions: `SubscriptionExpiredError`, `QuotaExceededError`.
+
+## Structure & Organization
+
+- Law of Demeter: NEVER chain `a.get_b().get_c().do_something()`. Create direct method.
+- One file, one responsibility: don't mix routes + service + schemas in the same file.
+- Imports organized: stdlib > third-party > local (Python) / react > libs > components > utils (TypeScript).
+- Dead code (unused functions, unused imports, commented variables) MUST be removed, not commented.
+
+## Type Safety
+
+- Python: type hints mandatory on all functions and variables. No generic `Any`.
+- TypeScript: strict mode enabled. No `any`, no `@ts-ignore`, no `as unknown as`.
+
+## Documentation
+
+- Every new finished feature MUST be documented in README.md: feature name, short description, and flow.
+- README MUST have a `## Features` section with updated feature list.
+"""
+    write_output(
+        REPO_ROOT / ".github" / "instructions" / "code-quality.instructions.md",
+        code_quality,
+        dry_run,
+    )
+
+    # ── 3. Frontend (modular) ─────────────────────────────────────────────
+    frontend = """---
+applyTo: "**/*.{tsx,jsx,css,scss,html,vue,svelte}"
+---
+
+# Frontend Rules — Antigravity Kit
+> Auto-generated via sync_ide.py. Do not edit manually.
+
+## Agent Routing
+
+For frontend/UI work, apply the `@frontend-specialist` agent.
+Read `.agent/agents/frontend-specialist.md` for full design rules.
+
+## Project Type Routing
+
+| Project Type | Primary Agent | Skills |
+|---|---|---|
+| **WEB** (Next.js, React web) | `frontend-specialist` | frontend-design |
+| **MOBILE** (iOS, Android, RN, Flutter) | `mobile-developer` | mobile-design |
+
+> Mobile + frontend-specialist = WRONG. Mobile = mobile-developer ONLY.
+
+## UI/UX Principles
+
+- No generic/template-looking layouts. Every UI must feel custom and premium.
+- Use modern typography (Inter, Roboto, Outfit) instead of browser defaults.
+- Use smooth gradients, micro-animations, and hover effects for engagement.
+- Dark mode support when applicable.
+- Responsive design is mandatory: mobile-first approach.
+- Accessibility: semantic HTML, ARIA labels, keyboard navigation.
+
+## Component Standards
+
+- Components must be focused and reusable. One component, one responsibility.
+- Props should be typed with interfaces (TypeScript) or PropTypes.
+- Avoid prop drilling: use context or state management for deep data.
+- CSS: prefer CSS Modules or scoped styles. Avoid global styles leaking.
+
+## Performance
+
+- Lazy load routes and heavy components.
+- Optimize images (WebP, proper sizing, lazy loading).
+- Core Web Vitals targets: LCP < 2.5s, FID < 100ms, CLS < 0.1.
+- Bundle size awareness: check imports, avoid importing entire libraries.
+"""
+    write_output(
+        REPO_ROOT / ".github" / "instructions" / "frontend.instructions.md",
+        frontend,
+        dry_run,
+    )
+
+    # ── 4. Backend (modular) ──────────────────────────────────────────────
+    backend = """---
+applyTo: "**/*.{py,ts,js,go,rs}"
+---
+
+# Backend Rules — Antigravity Kit
+> Auto-generated via sync_ide.py. Do not edit manually.
+
+## Agent Routing
+
+For backend/API work, apply the `@backend-specialist` agent.
+Read `.agent/agents/backend-specialist.md` for full patterns.
+
+For database work, apply the `@database-architect` agent.
+Read `.agent/agents/database-architect.md` for schema and query patterns.
+
+## API Design
+
+- RESTful conventions: proper HTTP methods, status codes, resource naming.
+- Validate ALL inputs at the boundary (request handlers). Never trust client data.
+- Return consistent error responses: `{ "error": "message", "code": "ERROR_CODE" }`.
+- Pagination mandatory for list endpoints. Use cursor-based when possible.
+- Rate limiting on public endpoints.
+- Version APIs when breaking changes are unavoidable.
+
+## Database
+
+- Migrations for ALL schema changes. Never modify production schema manually.
+- Indexes on columns used in WHERE, JOIN, ORDER BY clauses.
+- Foreign keys and constraints enforced at the database level.
+- Soft delete (is_deleted flag) preferred over hard delete for business data.
+- Connection pooling mandatory. Never open connections per request.
+
+## Architecture
+
+- Separation of concerns: routes/controllers > services > repositories > models.
+- Business logic in service layer, NEVER in route handlers.
+- Environment-specific configuration via environment variables.
+- Health check endpoint mandatory: `GET /health`.
+- Structured logging (JSON) with correlation IDs for request tracing.
+
+## Testing
+
+- Test pyramid: Unit > Integration > E2E.
+- AAA pattern: Arrange, Act, Assert.
+- Mock external dependencies (APIs, databases) in unit tests.
+- Integration tests against real database (use test containers or in-memory).
+"""
+    write_output(
+        REPO_ROOT / ".github" / "instructions" / "backend.instructions.md",
+        backend,
+        dry_run,
+    )
+
+    # ── 5. Security (modular) ─────────────────────────────────────────────
+    security = """---
+applyTo: "**"
+---
+
+# Security Rules — Antigravity Kit
+> Auto-generated via sync_ide.py. Do not edit manually.
+
+## Secrets Management
+
+- Secrets and API keys exclusively in `.env`. NEVER hardcoded, NEVER committed to git.
+- `.env.example` MUST exist with all required variables, without real values.
+- Sensitive environment variables NEVER have `NEXT_PUBLIC_` prefix.
+- Rotate secrets periodically. Use secret managers in production (AWS SM, GCP SM, Vault).
+
+## Input & Output
+
+- Validate and sanitize ALL user inputs. Use allowlists over denylists.
+- Parameterized queries ONLY. NEVER concatenate user input into SQL.
+- Escape output in HTML contexts to prevent XSS.
+- Content Security Policy (CSP) headers on all responses.
+
+## Authentication & Authorization
+
+- Use established libraries (NextAuth, Passport, Firebase Auth). Never roll your own crypto.
+- JWT tokens: short expiry (15min access, 7d refresh). Store refresh tokens securely.
+- RBAC (Role-Based Access Control) enforced at API layer, not just UI.
+- Password hashing with bcrypt or argon2. NEVER store plaintext passwords.
+
+## Error Handling
+
+- NEVER expose internal IDs (user_id, session_id) in browser console.
+- NEVER log sensitive data in console.log (tokens, emails, passwords).
+- Error messages returned to frontend NEVER expose stack traces, SQL queries, or internal structure.
+- Use generic error messages for clients. Log detailed errors server-side only.
+
+## Dependencies
+
+- Review dependencies before adding. Check maintenance status and known vulnerabilities.
+- Lock dependency versions. Use lockfiles (package-lock.json, poetry.lock).
+- Run dependency audit regularly: `npm audit`, `pip-audit`, `safety check`.
+
+## HTTPS & Transport
+
+- HTTPS mandatory in production. Redirect HTTP to HTTPS.
+- HSTS headers enabled. Secure and HttpOnly flags on cookies.
+- CORS configured with explicit allowed origins. Never use `*` in production.
+"""
+    write_output(
+        REPO_ROOT / ".github" / "instructions" / "security.instructions.md",
+        security,
+        dry_run,
+    )
+
+    print(f"  {GREEN}✔{RESET} Generated 5 files for GitHub Copilot")
+
+
 # ── registry ──────────────────────────────────────────────────────────────────
 TARGETS: dict[str, callable] = {
     "claude": generate_claude_config,
     "cursor": generate_cursor_config,
     "codex": generate_codex_config,
+    "copilot": generate_copilot_config,
 }
 
 
@@ -199,7 +491,9 @@ def main() -> None:
         print("  Make sure you are running from the project root.")
         sys.exit(1)
 
-    targets_to_run: list[str] = list(TARGETS.keys()) if args.target == "all" else [args.target]
+    targets_to_run: list[str] = (
+        list(TARGETS.keys()) if args.target == "all" else [args.target]
+    )
 
     for target in targets_to_run:
         TARGETS[target](args.dry_run)
@@ -208,7 +502,9 @@ def main() -> None:
     if args.dry_run:
         print(f"\n{YELLOW}{BOLD}[DRY-RUN] No files were modified.{RESET}\n")
     else:
-        print(f"\n{GREEN}{BOLD}✅ Sync complete for: {', '.join(targets_to_run)}{RESET}\n")
+        print(
+            f"\n{GREEN}{BOLD}✅ Sync complete for: {', '.join(targets_to_run)}{RESET}\n"
+        )
 
 
 if __name__ == "__main__":

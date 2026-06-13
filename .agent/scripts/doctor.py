@@ -4,8 +4,16 @@ doctor.py — Antigravity Kit Health Diagnostics
 Verifica a integridade completa do .agent/ (agentes, skills, workflows, scripts, memory).
 Usage: python .agent/scripts/doctor.py
 """
+
 import sys
 from pathlib import Path
+
+# Configuração de encoding para evitar erros em terminais Windows (cp1252)
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except AttributeError:
+        pass
 
 # ── constants ──────────────────────────────────────────────────────────────
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -64,8 +72,11 @@ def check_directory_structure() -> int:
     """Verify required .agent/ subdirectories exist."""
     errors = 0
     required_dirs = [
-        AGENTS_DIR, SKILLS_DIR, WORKFLOWS_DIR,
-        SCRIPTS_DIR, RULES_DIR,
+        AGENTS_DIR,
+        SKILLS_DIR,
+        WORKFLOWS_DIR,
+        SCRIPTS_DIR,
+        RULES_DIR,
     ]
     optional_dirs = [TESTS_DIR, MEMORY_DIR]
 
@@ -80,7 +91,9 @@ def check_directory_structure() -> int:
         if directory.exists():
             ok(f"{directory.name}/ found")
         else:
-            warn(f"{directory.name}/ not found (optional — will be created on first use)")
+            warn(
+                f"{directory.name}/ not found (optional — will be created on first use)"
+            )
 
     return errors
 
@@ -114,7 +127,9 @@ def check_agents() -> int:
 def check_skills() -> int:
     """Validate all skill directories have a SKILL.md."""
     errors = 0
-    skill_dirs = [d for d in SKILLS_DIR.iterdir() if d.is_dir()] if SKILLS_DIR.exists() else []
+    skill_dirs = (
+        [d for d in SKILLS_DIR.iterdir() if d.is_dir()] if SKILLS_DIR.exists() else []
+    )
 
     if not skill_dirs:
         fail("No skills found in .agent/skills/")
@@ -148,7 +163,11 @@ def check_cross_references() -> int:
     errors = 0
     ghost_refs: list[str] = []
     agents = list(AGENTS_DIR.glob("*.md")) if AGENTS_DIR.exists() else []
-    available_skills = {d.name for d in SKILLS_DIR.iterdir() if d.is_dir()} if SKILLS_DIR.exists() else set()
+    available_skills = (
+        {d.name for d in SKILLS_DIR.iterdir() if d.is_dir()}
+        if SKILLS_DIR.exists()
+        else set()
+    )
 
     for agent_path in agents:
         content = agent_path.read_text(encoding="utf-8", errors="ignore")
@@ -167,7 +186,7 @@ def check_cross_references() -> int:
             warn(f"Possible ghost skill reference: {ref}")
         # Warnings only — skill names may use aliases
     else:
-        ok(f"Cross-references: 0 ghost skills detected")
+        ok("Cross-references: 0 ghost skills detected")
 
     return errors
 
@@ -226,7 +245,7 @@ def check_tests() -> int:
     """Check that kit integrity test file exists."""
     test_file = TESTS_DIR / "test_kit_integrity.py"
     if TESTS_DIR.exists() and test_file.exists():
-        ok(f"tests/test_kit_integrity.py: ✅")
+        ok("tests/test_kit_integrity.py: ✅")
     else:
         warn("tests/test_kit_integrity.py: not found (run /ade to create)")
     return 0
@@ -310,7 +329,9 @@ def main() -> None:
         print(f"\n{GREEN}{BOLD}✅ All checks passed! Kit is healthy.{RESET}\n")
         sys.exit(0)
     else:
-        print(f"\n{RED}{BOLD}❌ {total_errors} issue(s) found. Fix before proceeding.{RESET}\n")
+        print(
+            f"\n{RED}{BOLD}❌ {total_errors} issue(s) found. Fix before proceeding.{RESET}\n"
+        )
         sys.exit(1)
 
 

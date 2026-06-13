@@ -13,20 +13,21 @@
 
 ## What's Included
 
-| Components        | Count | Description                                                        |
-| ----------------- | ----- | ------------------------------------------------------------------ |
-| **Agents**        | 20    | Specialist AI personas (frontend, backend, security, game dev, etc.) |
-| **Skills**        | 50    | Domain-specific knowledge modules with automated scripts           |
-| **Workflows**     | 15    | Slash-command procedures including the autonomous `/ade` pipeline  |
-| **Master Scripts**| 5     | `doctor.py`, `checklist.py`, `verify_all.py`, `sync_ide.py`, `auto_fixer.py` |
-| **Kit Tests**     | ✅     | Automated pytest suite — runs before every commit                  |
-| **Memory Layer**  | ✅     | Persistent lessons and gotchas across sessions                     |
+| Components         | Count | Description                                                                  |
+| ------------------ | ----- | ---------------------------------------------------------------------------- |
+| **Agents**         | 20    | Specialist AI personas (frontend, backend, security, game dev, etc.)         |
+| **Skills**         | 50    | Domain-specific knowledge modules with automated scripts                     |
+| **Workflows**      | 15    | Slash-command procedures including the autonomous `/ade` pipeline            |
+| **Master Scripts** | 5     | `doctor.py`, `checklist.py`, `verify_all.py`, `sync_ide.py`, `auto_fixer.py` |
+| **Kit Tests**      | ✅    | Automated pytest suite — runs before every commit                            |
+| **Memory Layer**   | ✅    | Persistent lessons and gotchas across sessions                               |
 
 ---
 
 ## Features
 
 ### 🤖 Intelligent Auto-Routing
+
 Describe what you need in plain English. The kit detects the domain and applies the right specialist automatically — no commands required.
 
 ```
@@ -37,6 +38,7 @@ You: "check kit" / "diagnose"                 → Health check (doctor.py)
 ```
 
 ### 🚀 Autonomous Development Pipeline (`/ade`)
+
 The most powerful mode. You describe a feature, the kit plans it, shows you the spec, and waits for approval before writing any code.
 
 ```
@@ -48,19 +50,25 @@ The most powerful mode. You describe a feature, the kit plans it, shows you the 
 **6-phase pipeline:** Discovery → Spec → ✋ Your Approval → Code → QA → Memory
 
 ### 🏥 Kit Health Diagnostics
+
 ```bash
 python .agent/scripts/doctor.py
 ```
+
 Validates all 20 agents, 47 skills, 13 workflows, and master scripts in seconds.
 
 ### 🔒 Automated Pre-Commit Guard
+
 Tests run automatically before every `git commit`. If anything breaks, the commit is blocked until fixed.
 
 ### 🧠 Persistent Memory Layer
+
 The kit remembers patterns and lessons learned across sessions, stored in `.agent/memory/`.
 
 ### 🔄 Multi-IDE Sync
-Export the kit configuration to Claude Code, Cursor, and Codex CLI:
+
+Export the kit configuration to Claude Code, Cursor, Codex CLI, and GitHub Copilot:
+
 ```bash
 python .agent/scripts/sync_ide.py --target all
 ```
@@ -70,7 +78,7 @@ python .agent/scripts/sync_ide.py --target all
 Este repositório é seu **Cérebro de Desenvolvimento**. Para criar um novo projeto (ex: Lotofácil, E-commerce, App Mobile) usando esta inteligência:
 
 1.  **Crie sua nova pasta** no computador.
-2.  **No chat do seu agente**, digite: 
+2.  **No chat do seu agente**, digite:
     ```
     /new-project
     ```
@@ -79,6 +87,7 @@ Este repositório é seu **Cérebro de Desenvolvimento**. Para criar um novo pro
 ---
 
 ## 📜 Regras de Manutenção
+
 Se você é um desenvolvedor ou quer que o agente atualize este kit base (fork), ele deve SEMPRE seguir as:
 [Regras de Manutenção e Evolução (KIT_MASTER_RULES.md)](file:///c:/Users/ferna/Desktop/IA%20Project/antigravity-kit-personalizado/KIT_MASTER_RULES.md)
 
@@ -142,12 +151,15 @@ The kit's rules are stored in `.agent/rules/GEMINI.md`. For the AI to follow the
 
 **For GitHub Copilot (VSCode):**
 
-1. Open the Command Palette: `Ctrl+Shift+P` (Win) or `Cmd+Shift+P` (Mac)
-2. Search for: `GitHub Copilot: Open Chat`
-3. At the start of a session, type:
-   ```
-   Read and apply the rules in .agent/rules/GEMINI.md
-   ```
+Run the sync script to generate Copilot-optimized instruction files:
+
+```bash
+python .agent/scripts/sync_ide.py --target copilot
+```
+
+This creates `.github/copilot-instructions.md` (loaded automatically in every chat) and modular files in `.github/instructions/` (loaded contextually by file type).
+
+Verify it's working: in Copilot Chat, check that the instruction files appear in the **References** list.
 
 **For Gemini Code Assist (VSCode):**
 
@@ -156,33 +168,38 @@ The `GEMINI.md` rules are loaded automatically if the file is present in the wor
 **For Cursor:**
 
 Run the sync script to generate Cursor-specific rules:
+
 ```bash
 python .agent/scripts/sync_ide.py --target cursor
 ```
+
 This creates `.cursor/rules.md` with the full kit configuration.
 
 **For Claude Code:**
+
 ```bash
 python .agent/scripts/sync_ide.py --target claude
 ```
+
 This creates `.claude/CLAUDE.md`.
 
 ### Step 3 — Install Recommended VSCode Extensions
 
 For the best development experience:
 
-| Extension | Purpose |
-|-----------|---------|
-| `esbenp.prettier-vscode` | Code formatting |
-| `dbaeumer.vscode-eslint` | Linting |
-| `ms-python.python` | Run `.agent/scripts/*.py` directly |
-| `ms-vscode.vscode-github-copilot` | AI coding assistant |
-| `github.copilot-chat` | Chat interface for agent commands |
+| Extension                         | Purpose                            |
+| --------------------------------- | ---------------------------------- |
+| `esbenp.prettier-vscode`          | Code formatting                    |
+| `dbaeumer.vscode-eslint`          | Linting                            |
+| `ms-python.python`                | Run `.agent/scripts/*.py` directly |
+| `ms-vscode.vscode-github-copilot` | AI coding assistant                |
+| `github.copilot-chat`             | Chat interface for agent commands  |
 
 ### Step 4 — Run the Kit Health Check from VSCode
 
 1. Open the integrated terminal: `` Ctrl+` ``
 2. Run:
+
 ```bash
 python .agent/scripts/doctor.py
 ```
@@ -201,22 +218,22 @@ In the Copilot chat panel, type any slash command:
 
 ## Slash Commands Reference
 
-| Command          | Purpose                                            |
-| ---------------- | -------------------------------------------------- |
-| `/ade`           | **Autonomous pipeline** — full feature end-to-end  |
-| `/build-saas`    | Plan a complete SaaS in 7 guided steps             |
-| `/plan`          | Create a detailed plan without writing code yet    |
-| `/create`        | Scaffold a new feature or application              |
-| `/brainstorm`    | Explore options with strategic questions           |
-| `/enhance`       | Improve an existing feature                        |
-| `/debug`         | Systematic bug investigation                       |
-| `/test`          | Generate and run tests                             |
-| `/deploy`        | Pre-flight checks + guided deployment              |
-| `/preview`       | Start local dev server                             |
-| `/status`        | Check project progress                             |
-| `/ui-ux-pro-max` | Premium UI/UX design in 50 styles                 |
+| Command          | Purpose                                               |
+| ---------------- | ----------------------------------------------------- |
+| `/ade`           | **Autonomous pipeline** — full feature end-to-end     |
+| `/build-saas`    | Plan a complete SaaS in 7 guided steps                |
+| `/plan`          | Create a detailed plan without writing code yet       |
+| `/create`        | Scaffold a new feature or application                 |
+| `/brainstorm`    | Explore options with strategic questions              |
+| `/enhance`       | Improve an existing feature                           |
+| `/debug`         | Systematic bug investigation                          |
+| `/test`          | Generate and run tests                                |
+| `/deploy`        | Pre-flight checks + guided deployment                 |
+| `/preview`       | Start local dev server                                |
+| `/status`        | Check project progress                                |
+| `/ui-ux-pro-max` | Premium UI/UX design in 50 styles                     |
 | `/clean`         | **Auto-fix & optimize** code (selective path support) |
-| `/orchestrate`   | Coordinate multiple agents for complex tasks        |
+| `/orchestrate`   | Coordinate multiple agents for complex tasks          |
 
 ---
 
@@ -235,7 +252,7 @@ python .agent/scripts/checklist.py .
 # Full verification before deployment
 python .agent/scripts/verify_all.py . --url http://localhost:3000
 
-# Sync kit to other IDEs
+# Sync kit to other IDEs (Claude, Cursor, Codex, Copilot)
 python .agent/scripts/sync_ide.py --target all
 ```
 
@@ -312,4 +329,4 @@ MIT — FernandoTenguan
 
 ---
 
-> *Build smarter. Ship faster. With confidence.*
+> _Build smarter. Ship faster. With confidence._
